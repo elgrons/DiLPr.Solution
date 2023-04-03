@@ -7,12 +7,12 @@
   <p>Hello @User.Identity.Name!</p>
   @using (Html.BeginForm("LogOff", "Account"))
   {
-    <button type="submit" class="red" value="Log out"></button>
+    <button type="submit" class="red">Log Out</button>
   }
 }
 else
 {
-
+  
 }
 <button onclick="showModal('login')">Log in</button>
 <button onclick="showModal('register')">Register</button>

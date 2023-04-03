@@ -23,95 +23,89 @@ namespace DiLPr.Controllers
       _signInManager = signInManager;
       _db = db;
     }
-    public IActionResult Register()
-    {
 
-      return View();
-    }
     [HttpPost]
     public async Task<IActionResult> Register(RegisterViewModel model)
     {
-      if (!ModelState.IsValid)
+      AppUser user = new AppUser { Email = model.Email, UserName = model.UserName, Breed = model.Breed, Age = model.Age };
+      IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+      if (result.Succeeded)
       {
-        return View(model);
+        return RedirectToAction("Index");
       }
       else
       {
-        AppUser user = new AppUser { Email = model.Email, UserName = model.UserName, Breed = model.Breed, Age = model.Age };
-        IdentityResult result = await _userManager.CreateAsync(user, model.Password);
-        if (result.Succeeded)
+        foreach (IdentityError error in result.Errors)
         {
-          return RedirectToAction("Login");
+          ModelState.AddModelError("", error.Description);
         }
-        else
-        {
-          foreach (IdentityError error in result.Errors)
-          {
-            ModelState.AddModelError("", error.Description);
-          }
-          return View(model);
-        }
+        return View(model);
       }
     }
-    public ActionResult Login()
-    {
-      return View();
-    }
+
+    // [HttpPost]
+    // public async Task<IActionResult> Login(LoginViewModel model)
+    // {
+    //   AppUser user = await _userManager.FindByEmailAsync(model.Email);
+    //   if (user != null)
+    //   {
+    //     Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user, model.Password, isPersistent: true, lockoutOnFailure: false);
+    //     if (result.Succeeded)
+    //     {
+    //       return RedirectToAction("Index");
+    //     }
+    //     else
+    //     {
+    //       ModelState.AddModelError("", "Whoopsies! There is something wrong with your email or username. Please try again.");
+    //       return View(model);
+    //     }
+
+    //   }
+    //   else
+    //   {
+    //     Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(userName: model.Email, model.Password, isPersistent: true, lockoutOnFailure: false);
+    //     if (result.Succeeded)
+    //     {
+    //       return RedirectToAction("Index");
+    //     }
+    //     else
+    //     {
+    //       ModelState.AddModelError("", "Whoops! There is something wrong with your email or username. Please try again.");
+    //       return View(model);
+    //     }
+    //   }
+    // }
 
     [HttpPost]
-    public async Task<IActionResult> Login(LoginViewModel model)
+    public async Task<ActionResult> Login(LoginViewModel model)
     {
-      if (!ModelState.IsValid)
+      Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: true, lockoutOnFailure: false);
+      if (result.Succeeded)
       {
-        return View(model);
+        return RedirectToAction("Index", "Home");
       }
       else
       {
-        AppUser user = await _userManager.FindByEmailAsync(model.Email);
-        if (user != null)
-        {
-          Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user, model.Password, isPersistent: true, lockoutOnFailure: false);
-          if (result.Succeeded)
-          {
-            return RedirectToAction("Index");
-          }
-          else
-          {
-          ModelState.AddModelError("", "Whoopsies! There is something wrong with your email or username. Please try again.");
-          return View(model);
-          }
-        }
-        else
-        {
-          Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(userName: model.Email, model.Password, isPersistent: true, lockoutOnFailure: false);
-          if (result.Succeeded)
-          {
-            return RedirectToAction("Index");
-          }
-          else
-          {
-            ModelState.AddModelError("", "Whoops! There is something wrong with your email or username. Please try again.");
-            return View(model);
-          }
-        }
+        ModelState.AddModelError("", "There is something wrong with your email or username. Please try again.");
+        return RedirectToAction("Index", "Account");
       }
     }
 
     [HttpPost]
-    public async Task<IActionResult> LogOut()
+    public async Task<IActionResult> LogOff()
     {
       await _signInManager.SignOutAsync();
       return RedirectToAction("Index", "Home");
     }
-    public async Task<IActionResult> Index()
+    public ActionResult Index()
     {
-      string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-      AppUser currentUser = await _userManager.FindByIdAsync(userId);
-      if (currentUser != null)
-      {
-        return View(currentUser);
-      }
-      return View(currentUser);
+      // string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      // AppUser currentUser = await _userManager.FindByIdAsync(userId);
+      // if (currentUser != null)
+      // {
+      //   return View(currentUser);
+      // }
+      return View();
     }
 
     [HttpPost]

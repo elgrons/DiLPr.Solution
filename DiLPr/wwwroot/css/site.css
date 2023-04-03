@@ -330,12 +330,42 @@ form > .form-row, .info-row {
 }
 
 .card {
-  width: 80%;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #444;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 20px;
+  text-align: center;
+  width: 50%;
   height: 600px;
-  display: block;
-  background: #666;
-  transform-origin: 50% 99%;
+  left: 25%;
+}
+
+.but-yay,
+.but-nope {
   position: absolute;
+  bottom: 10%;
+  font-size: 4rem;
+  z-index: 10;
+  cursor: pointer;
+  color: #ffffff;
+  padding: 10px .5em;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+.but-yay {
+  background-color: #3cba54;
+  border: none;
+  right: 10%;
+}
+
+.but-nope {
+  background-color: #db3236;
+  border: none;
+  left: 10%;
 }
 
 @keyframes yay {
