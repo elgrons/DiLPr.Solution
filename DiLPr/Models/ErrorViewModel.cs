@@ -1,3 +1,5 @@
+#nullable enable
+
 namespace DiLPr.Models;
 
 public class ErrorViewModel
