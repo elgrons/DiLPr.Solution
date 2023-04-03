@@ -3,6 +3,7 @@ using System;
 using DiLPr.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DiLPr.Migrations
 {
     [DbContext(typeof(DiLPrContext))]
-    partial class DiLPrContextModelSnapshot : ModelSnapshot
+    [Migration("20230403212802_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,8 +29,17 @@ namespace DiLPr.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Breed")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Detail")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Email")
@@ -43,6 +54,9 @@ namespace DiLPr.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -83,22 +97,37 @@ namespace DiLPr.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("DiLPr.Models.AppUserPuppr", b =>
+                {
+                    b.Property<int>("AppUserPupprId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<int?>("PupprId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Swipe")
+                        .HasColumnType("tinyint(1)");
+
+                    b.HasKey("AppUserPupprId");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("PupprId");
+
+                    b.ToTable("Join");
+                });
+
             modelBuilder.Entity("DiLPr.Models.Profile", b =>
                 {
                     b.Property<int>("ProfileId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Breed")
-                        .HasColumnType("longtext");
-
                     b.Property<string>("Details")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Name")
                         .HasColumnType("longtext");
 
                     b.Property<string>("UserId")
@@ -109,30 +138,6 @@ namespace DiLPr.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Profiles");
-                });
-
-            modelBuilder.Entity("DiLPr.Models.ProfilePuppr", b =>
-                {
-                    b.Property<int>("ProfilePupprId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProfileId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PupprId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Swipe")
-                        .HasColumnType("tinyint(1)");
-
-                    b.HasKey("ProfilePupprId");
-
-                    b.HasIndex("ProfileId");
-
-                    b.HasIndex("PupprId");
-
-                    b.ToTable("Join");
                 });
 
             modelBuilder.Entity("DiLPr.Models.Puppr", b =>
@@ -277,6 +282,21 @@ namespace DiLPr.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("DiLPr.Models.AppUserPuppr", b =>
+                {
+                    b.HasOne("DiLPr.Models.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId");
+
+                    b.HasOne("DiLPr.Models.Puppr", "Puppr")
+                        .WithMany()
+                        .HasForeignKey("PupprId");
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Puppr");
+                });
+
             modelBuilder.Entity("DiLPr.Models.Profile", b =>
                 {
                     b.HasOne("DiLPr.Models.AppUser", "User")
@@ -284,21 +304,6 @@ namespace DiLPr.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("DiLPr.Models.ProfilePuppr", b =>
-                {
-                    b.HasOne("DiLPr.Models.Profile", "Profile")
-                        .WithMany()
-                        .HasForeignKey("ProfileId");
-
-                    b.HasOne("DiLPr.Models.Puppr", "Puppr")
-                        .WithMany()
-                        .HasForeignKey("PupprId");
-
-                    b.Navigation("Profile");
-
-                    b.Navigation("Puppr");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

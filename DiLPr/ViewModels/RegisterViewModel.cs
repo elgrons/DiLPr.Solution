@@ -17,14 +17,6 @@ namespace DiLPr.ViewModels
     public string UserName { get; set; }
 
     [Required]
-    [Display(Name = "Breed")]
-    public string Breed { get; set; }
-
-    [Required]
-    [Display(Name = "Age")]
-    public int Age { get; set; }
-
-    [Required]
     [DataType(DataType.Password)]
     // [RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{6,}$", ErrorMessage = "Your password must contain at least six characters, a capital letter, a lowercase letter, a number, and a special character.")]
     public string Password { get; set; }

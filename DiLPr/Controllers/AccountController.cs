@@ -27,7 +27,7 @@ namespace DiLPr.Controllers
     [HttpPost]
     public async Task<IActionResult> Register(RegisterViewModel model)
     {
-      AppUser user = new AppUser { Email = model.Email, UserName = model.UserName, Breed = model.Breed, Age = model.Age };
+      AppUser user = new AppUser { Email = model.Email, UserName = model.UserName };
       IdentityResult result = await _userManager.CreateAsync(user, model.Password);
       if (result.Succeeded)
       {
@@ -76,18 +76,31 @@ namespace DiLPr.Controllers
     //   }
     // }
 
+    public ActionResult Login()
+    {
+      return View();
+    }
+
     [HttpPost]
     public async Task<ActionResult> Login(LoginViewModel model)
     {
-      Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: true, lockoutOnFailure: false);
-      if (result.Succeeded)
+      AppUser user = await _userManager.FindByEmailAsync(model.Email);
+      if (!ModelState.IsValid)
       {
-        return RedirectToAction("Index", "Home");
+        return View(model);
       }
       else
       {
-        ModelState.AddModelError("", "There is something wrong with your email or username. Please try again.");
-        return RedirectToAction("Index", "Account");
+        Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user, model.Password, isPersistent: true, lockoutOnFailure: false);
+        if (result.Succeeded)
+        {
+          return RedirectToAction("Index");
+        }
+        else
+        {
+          ModelState.AddModelError("", "There is something wrong with your email or username. Please try again.");
+          return View(model);
+        }
       }
     }
 
