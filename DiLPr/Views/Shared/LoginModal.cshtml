@@ -1,0 +1,23 @@
+@using DiLPr.ViewModels
+@model LoginViewModel
+
+<div id="login-modal" class="modal obscured">
+  <div class="modal-message">Log in</div>
+
+  @using (Html.BeginForm("Login", "Account"))
+  {
+    <div class="form-row">
+      @Html.LabelFor(m => m.Email)
+      @Html.TextBoxFor(m => m.Email)
+    </div>
+    <div class="form-row">
+      @Html.LabelFor(m => m.Password)
+      @Html.EditorFor(m => m.Password)
+    </div>
+    <button class="green" type="submit">Log in</button>
+  }
+
+  <div class="button-area">
+    <button onclick="hideModal('login')">Cancel</button>
+  </div>
+</div>

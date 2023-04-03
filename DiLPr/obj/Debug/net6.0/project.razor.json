@@ -18389,6 +18389,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/Users/eliotgronstal/Desktop/Epicodus/DiLPr.Solution/DiLPr/Views/Shared/RegisterModal.cshtml",
+      "TargetPath": "Views\\Shared\\RegisterModal.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/Users/eliotgronstal/Desktop/Epicodus/DiLPr.Solution/DiLPr/Views/_ViewStart.cshtml",
       "TargetPath": "Views\\_ViewStart.cshtml",
       "FileKind": "mvc"
@@ -18406,6 +18411,16 @@
     {
       "FilePath": "/Users/eliotgronstal/Desktop/Epicodus/DiLPr.Solution/DiLPr/Views/_ViewImports.cshtml",
       "TargetPath": "Views\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/eliotgronstal/Desktop/Epicodus/DiLPr.Solution/DiLPr/Views/Account/Index.cshtml",
+      "TargetPath": "Views\\Account\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/eliotgronstal/Desktop/Epicodus/DiLPr.Solution/DiLPr/Views/Shared/LoginModal.cshtml",
+      "TargetPath": "Views\\Shared\\LoginModal.cshtml",
       "FileKind": "mvc"
     }
   ],

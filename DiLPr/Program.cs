@@ -1,27 +1,59 @@
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using DiLPr.Models;
+using Microsoft.AspNetCore.Identity;
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+namespace DiLPr
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    class Program
+{
+    static void Main(string[] args)
+    {
+
+      WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+      builder.Services.AddControllersWithViews();
+
+      builder.Services.AddDbContext<DiLPrContext>(
+                        dbContextOptions => dbContextOptions
+                          .UseMySql(
+                            builder.Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(builder.Configuration["ConnectionStrings:DefaultConnection"]
+                          )
+                        )
+                      );
+      
+      builder.Services.AddIdentity<AppUser, IdentityRole>()
+                .AddEntityFrameworkStores<DiLPrContext>()
+                .AddDefaultTokenProviders();
+
+      builder.Services.Configure<IdentityOptions>(options =>
+      {
+        options.Password.RequireDigit = false;
+        options.Password.RequireLowercase = false;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequiredLength = 0;
+        options.Password.RequiredUniqueChars = 0;
+      });
+
+      WebApplication app = builder.Build();
+
+      // app.UseDeveloperExceptionPage();
+      app.UseHttpsRedirection();
+      app.UseStaticFiles();
+
+      app.UseRouting();
+
+      app.UseAuthentication(); 
+      app.UseAuthorization();
+
+      app.MapControllerRoute(
+          name: "default",
+          pattern: "{controller=Home}/{action=Index}/{id?}"
+        );
+
+      app.Run();
+    }
+  }
 }
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-app.Run();

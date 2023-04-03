@@ -1,0 +1,39 @@
+@using DiLPr.ViewModels
+@model RegisterViewModel
+
+<div id="register-modal" class="modal obscured">
+  <div class="modal-message">Register</div>
+
+  @using (Html.BeginForm("Register", "Account"))
+  {
+    <div class="form-row">
+      @Html.LabelFor(user => user.Email)
+      @Html.TextBoxFor(user=> user.Email)
+    </div>
+    <div class="form-row">
+      @Html.LabelFor(user => user.UserName)
+      @Html.TextBoxFor(user=> user.UserName)
+    </div>
+    <div class="form-row">
+      @Html.LabelFor(user => user.Breed)
+      @Html.TextBoxFor(user=> user.Breed)
+    </div>
+    <div class="form-row">
+      @Html.LabelFor(user => user.Age)
+      @Html.TextBoxFor(user=> user.Age)
+    </div>
+    <div class="form-row">
+      @Html.LabelFor(user=> user.Password)
+      @Html.EditorFor(user=> user.Password)
+    </div>
+    <div class="form-row">
+      @Html.LabelFor(user=> user.ConfirmPassword)
+      @Html.EditorFor(user=> user.ConfirmPassword)
+    </div>
+    <button class="yellow" type="submit">Register</button>
+  }
+  
+  <div class="button-area">
+    <button onclick="hideModal('register')">Cancel</button>
+  </div>
+</div>
