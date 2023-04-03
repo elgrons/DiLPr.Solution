@@ -9,6 +9,9 @@ namespace DiLPr.Models
             : base(options)
         {
         }
-        public DbSet<DiLPr.Models.AppUser> AppUsers { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<AppUserPuppr> Join { get; set; }
+        public DbSet<Profile> Profiles { get; set; }
+        public DbSet<Puppr> Pupprs { get; set; }
     }
 }
