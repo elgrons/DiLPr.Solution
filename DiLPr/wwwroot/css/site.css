@@ -3,10 +3,10 @@
   --small-border: 0.1rem solid #00000022;
   --border-radius: 0.5rem;
 
-  --main-bg-color: #3c4256;
+  --main-bg-color: #333333;
 	--main-text-color: #d7d7d7;
-  --header-color: #150d0d;
-  --header-text-color: #5f835f;
+  --header-color: #c54c4c;
+  --header-text-color: #f23b08;
 	--text-highlight-color: rgb(160, 128, 68);
 }
 
@@ -29,7 +29,7 @@ body {
 }
 
 h1.home-header {
-  --text-shadow: 0 0 0.25rem 0.1rem rgba(0, 0, 0, 0.75);
+  --text-shadow: 0 0 0.25rem 0.1rem rgba(77, 8, 8, 0.75);
 }
 
 h1.page-header {
@@ -212,11 +212,11 @@ button:hover {
 }
 
 .modal#login-modal {
-	background-color: rgb(70, 84, 63);
+	background-color: rgb(188, 75, 0);
 }
 
 .modal#register-modal {
-	background-color: rgb(116, 124, 74);
+	background-color: rgb(188, 75, 0);
 }
 
 .modal.delete-modal {
