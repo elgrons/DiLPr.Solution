@@ -1,10 +1,9 @@
 namespace DiLPr.Models
 {
-  public class ProfilePuppr
+  public class PupprProfile
   {       
-    public int ProfilePupprId { get; set; }
+    public int PupprProfileId { get; set; }
     public Profile Profile { get; set; }
-    public Puppr Puppr { get; set; }
-    public bool Swipe { get; set; }
+    public string PupprName { get; set; }
   }
 }
