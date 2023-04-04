@@ -1032,19 +1032,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Razieleron\\.nuget\\packages\\": {}
+    "/Users/eliotgronstal/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Razieleron\\Desktop\\Coding\\Epicodus\\team-week-2\\DiLPr.Solution\\DiLPr\\DiLPr.csproj",
+      "projectUniqueName": "/Users/eliotgronstal/Desktop/Epicodus/DiLPr.Solution/DiLPr/DiLPr.csproj",
       "projectName": "DiLPr",
-      "projectPath": "C:\\Users\\Razieleron\\Desktop\\Coding\\Epicodus\\team-week-2\\DiLPr.Solution\\DiLPr\\DiLPr.csproj",
-      "packagesPath": "C:\\Users\\Razieleron\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Razieleron\\Desktop\\Coding\\Epicodus\\team-week-2\\DiLPr.Solution\\DiLPr\\obj\\",
+      "projectPath": "/Users/eliotgronstal/Desktop/Epicodus/DiLPr.Solution/DiLPr/DiLPr.csproj",
+      "packagesPath": "/Users/eliotgronstal/.nuget/packages/",
+      "outputPath": "/Users/eliotgronstal/Desktop/Epicodus/DiLPr.Solution/DiLPr/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Razieleron\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/eliotgronstal/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -1114,7 +1114,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.406\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.402/RuntimeIdentifierGraph.json"
       }
     }
   }

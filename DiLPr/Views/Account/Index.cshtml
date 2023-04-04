@@ -1,17 +1,19 @@
 @await Html.PartialAsync("LoginModal")
 @await Html.PartialAsync("RegisterModal")
 
+@model DiLPr.Models.AppUser
 
-@if (User.Identity.IsAuthenticated)
-{
-  <p>Hello @User.Identity.Name!</p>
-  @using (Html.BeginForm("LogOff", "Account"))
+<div id="page-content">
+  @if (User.Identity.IsAuthenticated)
   {
-    <button type="submit" class="red">Log Out</button>
+    <h2 style="font-size: 40px;">Hello @User.Identity.Name</h2>
+  } 
+
+  else
+  {
+    <button onclick="showModal('login')">Log in</button>
+    <button onclick="showModal('register')">Register</button>
   }
-}
-else
-{
-  <button onclick="showModal('login')">Log in</button>
-  <button onclick="showModal('register')">Register</button>
-}
+
+  <a>here you goooo!!!!</a>
+</div>

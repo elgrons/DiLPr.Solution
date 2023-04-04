@@ -1,20 +1,28 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Homeward Bound";
 }
 
-<div class="text-center">
+@if (User.Identity.IsAuthenticated)
+{
+  <div class="text-center">
     <h1 class="display-4">Welcome to DiLPr</h1>
-</div>
+  </div>
 
-<div class="cardcontainer list">
-  <ul class="cardlist">
-    <li class="card current">#1</li>
-    <li class="card">#2</li>
-    <li class="card">#3</li>
-    <li class="card">#4</li>
-    <li class="card">#5</li>
-    <li class="card">#6</li>
-  </ul>
-  <button class="but-nope">❌</button>
-  <button class="but-yay">✔️</button>
-</div>
+  <div class="cardcontainer list">
+    <ul class="cardlist">
+      <li class="card current">#1</li>
+      <li class="card">#2</li>
+      <li class="card">#3</li>
+      <li class="card">#4</li>
+      <li class="card">#5</li>
+      <li class="card">#6</li>
+    </ul>
+    <button class="but-nope">❌</button>
+    <button class="but-yay">✔️</button>
+  </div>
+}
+else
+{
+  <h1>Dog-gone it!</h1> //sad dog face goes here//
+  <h5>You must log in or create an account to view pups in your area</h5>
+}

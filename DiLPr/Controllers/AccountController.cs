@@ -36,8 +36,6 @@ namespace DiLPr.Controllers
         newProfile.User = user;
         _db.Profiles.Add(newProfile);
         _db.SaveChanges();
-        user.ProfileId = newProfile.ProfileId;
-        _db.SaveChanges();
         return RedirectToAction("Index", "Account");
       }
       else
@@ -49,40 +47,6 @@ namespace DiLPr.Controllers
         return View(model);
       }
     }
-
-    // [HttpPost]
-    // public async Task<IActionResult> Login(LoginViewModel model)
-    // {
-    //   AppUser user = await _userManager.FindByEmailAsync(model.Email);
-    //   if (user != null)
-    //   {
-    //     Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user, model.Password, isPersistent: true, lockoutOnFailure: false);
-    //     if (result.Succeeded)
-    //     {
-    //       return RedirectToAction("Index");
-    //     }
-    //     else
-    //     {
-    //       ModelState.AddModelError("", "Whoopsies! There is something wrong with your email or username. Please try again.");
-    //       return View(model);
-    //     }
-
-    //   }
-    //   else
-    //   {
-    //     Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(userName: model.Email, model.Password, isPersistent: true, lockoutOnFailure: false);
-    //     if (result.Succeeded)
-    //     {
-    //       return RedirectToAction("Index");
-    //     }
-    //     else
-    //     {
-    //       ModelState.AddModelError("", "Whoops! There is something wrong with your email or username. Please try again.");
-    //       return View(model);
-    //     }
-    //   }
-    // }
-
     public ActionResult Login()
     {
       return View();
@@ -101,7 +65,7 @@ namespace DiLPr.Controllers
         Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user, model.Password, isPersistent: true, lockoutOnFailure: false);
         if (result.Succeeded)
         {
-          return RedirectToAction("Index");
+          return RedirectToAction("Index", "Home");
         }
         else
         {
@@ -117,10 +81,11 @@ namespace DiLPr.Controllers
       await _signInManager.SignOutAsync();
       return RedirectToAction("Index", "Home");
     }
+
     public ActionResult Index()
     {
       // string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-      // AppUser currentUser = await _userManager.FindByIdAsync(userId);
+      // var currentUser = await _userManager.FindByIdAsync(userId);
       // if (currentUser != null)
       // {
       //   return View(currentUser);
@@ -128,17 +93,16 @@ namespace DiLPr.Controllers
       return View();
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Edit(string Email, string UserName)
-    {
-      string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-      AppUser userToUpdate = await _userManager.FindByIdAsync(userId);
-      userToUpdate.UserName = UserName;
-      userToUpdate.Email = Email;
-      IdentityResult result = await _userManager.UpdateAsync(userToUpdate);
-      return RedirectToAction("Index");
-    }
 
-
+    // [HttpPost]
+    // public async Task<IActionResult> Edit(string Email, string UserName)
+    // {
+    //   string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    //   AppUser userToUpdate = await _userManager.FindByIdAsync(userId);
+    //   userToUpdate.UserName = UserName;
+    //   userToUpdate.Email = Email;
+    //   IdentityResult result = await _userManager.UpdateAsync(userToUpdate);
+    //   return RedirectToAction("Index");
+    // }
   }
 }

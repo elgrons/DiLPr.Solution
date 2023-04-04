@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DiLPr.Migrations
 {
     [DbContext(typeof(DiLPrContext))]
-    [Migration("20230403220535_UpdateModels")]
-    partial class UpdateModels
+    [Migration("20230404181950_RemoveProfileIdFromAppUpser")]
+    partial class RemoveProfileIdFromAppUpser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -85,6 +85,28 @@ namespace DiLPr.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("DiLPr.Models.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("ImageData")
+                        .HasColumnType("longblob");
+
+                    b.Property<string>("ImageTitle")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("ProfileId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProfileId");
+
+                    b.ToTable("Images");
+                });
+
             modelBuilder.Entity("DiLPr.Models.Profile", b =>
                 {
                     b.Property<int>("ProfileId")
@@ -103,12 +125,12 @@ namespace DiLPr.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("UserPupId")
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("ProfileId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserPupId");
 
                     b.ToTable("Profiles");
                 });
@@ -279,13 +301,22 @@ namespace DiLPr.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("DiLPr.Models.Image", b =>
+                {
+                    b.HasOne("DiLPr.Models.Profile", null)
+                        .WithMany("Pictures")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("DiLPr.Models.Profile", b =>
                 {
-                    b.HasOne("DiLPr.Models.AppUser", "User")
+                    b.HasOne("DiLPr.Models.AppUser", "UserPup")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserPupId");
 
-                    b.Navigation("User");
+                    b.Navigation("UserPup");
                 });
 
             modelBuilder.Entity("DiLPr.Models.ProfilePuppr", b =>
@@ -352,6 +383,11 @@ namespace DiLPr.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DiLPr.Models.Profile", b =>
+                {
+                    b.Navigation("Pictures");
                 });
 #pragma warning restore 612, 618
         }
