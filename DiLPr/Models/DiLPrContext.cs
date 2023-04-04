@@ -10,9 +10,8 @@ namespace DiLPr.Models
         {
         }
         public DbSet<AppUser> AppUsers { get; set; }
-        public DbSet<ProfilePuppr> Join { get; set; }
+        public DbSet<PupprProfile> Join { get; set; }
         public DbSet<Profile> Profiles { get; set; }
-        public DbSet<Puppr> Pupprs { get; set; }
         public DbSet<Image> Images { get; set; }
     }
 }
