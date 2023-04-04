@@ -1,8 +1,6 @@
 using System.Security.Claims;
 
 namespace DiLPr.Models;
-
-
   // {
   //       string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
   //       ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
@@ -13,15 +11,10 @@ namespace DiLPr.Models;
       //   return RedirectToAction("Index");
       // }
 
-
-
-
-
-
 public class Profile
 {
   public int ProfileId { get; set; }
-  public AppUser User { get; set; }
+  public AppUser UserPup { get; set; }
   public string Name { get; set; }
   public string Breed { get; set; }
   public int Age { get; set; }

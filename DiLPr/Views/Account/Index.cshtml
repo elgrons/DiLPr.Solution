@@ -3,8 +3,9 @@
 <div id="page-content">
   @if (User.Identity.IsAuthenticated)
   {
-    <h2 style="font-size: 40px;">Hello</h2>
-  }
+    <h2 style="font-size: 40px;">Hello @User.Identity.Name</h2>
+  } 
+
   else
   {
       <h5>@Html.ActionLink("Create an account", "Register")</h5>

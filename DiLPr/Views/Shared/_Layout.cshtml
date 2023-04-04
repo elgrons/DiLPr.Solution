@@ -33,7 +33,6 @@
                                     <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Profile">View Profile</a>
                                     </li>
-                                    <p>Hello @User.Identity.Name!</p>
                                     @using (Html.BeginForm("LogOff", "Account"))
                                     {
                                         <button type="submit" class="red">Log out</button>

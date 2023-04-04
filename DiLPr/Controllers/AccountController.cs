@@ -33,10 +33,8 @@ namespace DiLPr.Controllers
       if (result.Succeeded)
       {
         Profile newProfile = new Profile();
-        newProfile.User = user;
+        newProfile.UserPup = user;
         _db.Profiles.Add(newProfile);
-        _db.SaveChanges();
-        user.ProfileId = newProfile.ProfileId;
         _db.SaveChanges();
         return RedirectToAction("Index", "Account");
       }
@@ -84,15 +82,15 @@ namespace DiLPr.Controllers
       return RedirectToAction("Index", "Home");
     }
 
-    public async Task<IActionResult> Index(LoginViewModel model)
+    public ActionResult Index()
     {
-      string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-      var currentUser = await _userManager.FindByIdAsync(userId);
-      if (currentUser != null)
-      {
-        return View(currentUser);
-      }
-      return View(currentUser);
+      // string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      // var currentUser = await _userManager.FindByIdAsync(userId);
+      // if (currentUser != null)
+      // {
+      //   return View(currentUser);
+      // }
+      return View();
     }
 
 
