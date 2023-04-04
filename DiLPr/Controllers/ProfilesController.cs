@@ -91,7 +91,17 @@ namespace DiLPr.Controllers
             .Include(profile => profile.JoinEntities)
             .ThenInclude(join => join.Tag)
             .FirstOrDefault(profile => profile.ProfileId == id);
-      
+
+      List<Image> imgList = _db.Images.Where(entry=> entry.Profile == thisProfile).ToList();
+      ViewBag.Images = new Dictionary < string, string > ();
+      foreach(Image img in imgList)
+      {
+        string imageBase64Data = Convert.ToBase64String(img.ImageData);
+        string imageDataURL = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+        //specific to jpg?? need to figure out how to make applicable to others
+        ViewBag.Images.Add($"{img.Caption}",imageDataURL);
+      }
+
       return View(thisProfile);
     }
 
