@@ -19,6 +19,7 @@ namespace DiLPr.Controllers
 
     public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, DiLPrContext db)
     {
+
       _userManager = userManager;
       _signInManager = signInManager;
       _db = db;
@@ -31,7 +32,13 @@ namespace DiLPr.Controllers
       IdentityResult result = await _userManager.CreateAsync(user, model.Password);
       if (result.Succeeded)
       {
-        return RedirectToAction("Index");
+        Profile newProfile = new Profile();
+        newProfile.User = user;
+        _db.Profiles.Add(newProfile);
+        _db.SaveChanges();
+        user.ProfileId = newProfile.ProfileId;
+        _db.SaveChanges();
+        return RedirectToAction("Index", "Account");
       }
       else
       {

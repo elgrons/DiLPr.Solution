@@ -13,5 +13,6 @@ namespace DiLPr.Models
         public DbSet<ProfilePuppr> Join { get; set; }
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Puppr> Pupprs { get; set; }
+        public DbSet<Image> Images { get; set; }
     }
 }
