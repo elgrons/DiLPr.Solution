@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/eliotgronstal/Desktop/Epicodus/DiLPr.Solution/DiLPr/DiLPr.csproj": {}
+    "/Users/bakshev/Desktop/DiLPr.Solution/DiLPr/DiLPr.csproj": {}
   },
   "projects": {
-    "/Users/eliotgronstal/Desktop/Epicodus/DiLPr.Solution/DiLPr/DiLPr.csproj": {
+    "/Users/bakshev/Desktop/DiLPr.Solution/DiLPr/DiLPr.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/eliotgronstal/Desktop/Epicodus/DiLPr.Solution/DiLPr/DiLPr.csproj",
+        "projectUniqueName": "/Users/bakshev/Desktop/DiLPr.Solution/DiLPr/DiLPr.csproj",
         "projectName": "DiLPr",
-        "projectPath": "/Users/eliotgronstal/Desktop/Epicodus/DiLPr.Solution/DiLPr/DiLPr.csproj",
-        "packagesPath": "/Users/eliotgronstal/.nuget/packages/",
-        "outputPath": "/Users/eliotgronstal/Desktop/Epicodus/DiLPr.Solution/DiLPr/obj/",
+        "projectPath": "/Users/bakshev/Desktop/DiLPr.Solution/DiLPr/DiLPr.csproj",
+        "packagesPath": "/Users/bakshev/.nuget/packages/",
+        "outputPath": "/Users/bakshev/Desktop/DiLPr.Solution/DiLPr/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/eliotgronstal/.nuget/NuGet/NuGet.Config"
+          "/Users/bakshev/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
