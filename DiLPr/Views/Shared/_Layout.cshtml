@@ -24,11 +24,23 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Index">Account</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Index">Sign-Up</a>
-                        </li>
+
+                        <div>
+                            @if (User.Identity.IsAuthenticated) {
+                            <p>Hello <span class="highlighted">@User.Identity.Name</span></p>
+                            @using (Html.BeginForm("LogOff", "Account"))
+                            {
+                                <button type="submit">Log out</button>
+                            }
+                        } else {
+                            <a href="/Account">
+                                <button>Log in / Register</button>
+                            </a>
+                        }
+                        </div>
+
                     </ul>
                 </div>
             </div>
