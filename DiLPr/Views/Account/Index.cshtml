@@ -1,3 +1,6 @@
+@await Html.PartialAsync("LoginModal")
+@await Html.PartialAsync("RegisterModal")
+
 @model DiLPr.Models.AppUser
 
 <div id="page-content">
@@ -8,7 +11,9 @@
 
   else
   {
-      <h5>@Html.ActionLink("Create an account", "Register")</h5>
-      <h5>@Html.ActionLink("Log in", "Login")</h5>
+    <button onclick="showModal('login')">Log in</button>
+    <button onclick="showModal('register')">Register</button>
   }
+
+  <a>here you goooo!!!!</a>
 </div>

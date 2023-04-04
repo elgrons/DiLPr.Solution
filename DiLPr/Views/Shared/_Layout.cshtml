@@ -23,15 +23,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Index">Account</a>
-                        </li>
 
                         <div>
                             @if (User.Identity.IsAuthenticated)
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Profile">View Profile</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Profiles" asp-action="Index">View Profile</a>
                                     </li>
                                     @using (Html.BeginForm("LogOff", "Account"))
                                     {
@@ -40,8 +37,9 @@
                                 }
                                 else
                                 {
-                                    <button onclick="showModal('login')">Log in</button>
-                                    <button onclick="showModal('register')">Register</button>
+                                    <a href="/Account">
+                                        <button>Account</button>
+                                    </a>
                                 }
                         </div>
 
@@ -53,8 +51,6 @@
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
-            @await Html.PartialAsync("LoginModal")
-            @await Html.PartialAsync("RegisterModal")
         </main>
     </div>
 

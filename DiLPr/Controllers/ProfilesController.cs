@@ -50,7 +50,78 @@ namespace DiLPr.Controllers
         _db.SaveChanges();
       }
       ViewBag.Message = "Image(s) stored in   database!";
-    return View("Index");
+      return View("Index");
     }
+
+    public async Task<ActionResult> Index()
+    { 
+      string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      AppUser currentUser = await _userManager.FindByIdAsync(userId);
+      if (currentUser != null)
+      {
+        return View(currentUser);
+      }
+      return View();
+
+      // AppUser user = ;
+      // Profile thisProfile = _db.Profiles
+      //   .Where(e => e.User.UserName == user.UserName)
+      // return View();
+    }
+
+    // public ActionResult Details(int id)
+    // {
+    //   ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "MachineName");
+    //   Engineer thisEngineer = _db.Engineers
+    //       .Include(engineer => engineer.JoinEntities)
+    //       .ThenInclude(join => join.Machine)
+    //       .FirstOrDefault(engineer => engineer.EngineerId == id);
+    //   return View(thisEngineer);
+    // }
+
+    // public ActionResult Edit(int id)
+    // {
+    //   Engineer thisEngineer = _db.Engineers.FirstOrDefault(engineers => engineers.EngineerId == id);
+    //   return View(thisEngineer);
+    // }
+
+    // [HttpPost]
+    // public ActionResult Edit(Engineer engineer)
+    // {
+    //   if (!ModelState.IsValid)
+    //   {
+    //     return View(engineer);
+    //   }
+    //   else
+    //   {
+    //     _db.Engineers.Update(engineer);
+    //     _db.SaveChanges();
+    //     return RedirectToAction("Index");
+    //   }
+    // }
+
+    // public ActionResult Delete(int id)
+    // {
+    //   Profile thisProfile = _db.Engineers.FirstOrDefault(engineers => engineers.EngineerId == id);
+    //   return View(thisEngineer);
+    // }
+
+    // [HttpPost, ActionName("Delete")]
+    // public ActionResult DeleteConfirmed(int id)
+    // {
+    //   Engineer thisEngineer = _db.Engineers.FirstOrDefault(engineers => engineers.EngineerId == id);
+    //   _db.Engineers.Remove(thisEngineer);
+    //   _db.SaveChanges();
+    //   return RedirectToAction("Index");
+    // }
+
+    // [HttpPost]
+    // public ActionResult DeleteJoin(int joinId)
+    // {
+    //   EngineerMachine joinEntry = _db.EngineerMachines.FirstOrDefault(entry => entry.EngineerMachineId == joinId);
+    //   _db.EngineerMachines.Remove(joinEntry);
+    //   _db.SaveChanges();
+    //   return RedirectToAction("Index");
+    // }
   }
 }

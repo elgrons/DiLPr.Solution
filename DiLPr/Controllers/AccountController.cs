@@ -33,7 +33,7 @@ namespace DiLPr.Controllers
       if (result.Succeeded)
       {
         Profile newProfile = new Profile();
-        newProfile.UserPup = user;
+        newProfile.User = user;
         _db.Profiles.Add(newProfile);
         _db.SaveChanges();
         return RedirectToAction("Index", "Account");
