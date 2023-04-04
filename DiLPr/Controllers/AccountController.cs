@@ -60,7 +60,7 @@ namespace DiLPr.Controllers
         Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user, model.Password, isPersistent: true, lockoutOnFailure: false);
         if (result.Succeeded)
         {
-          return RedirectToAction("Index");
+          return RedirectToAction("Index", "Home");
         }
         else
         {
@@ -76,26 +76,28 @@ namespace DiLPr.Controllers
       await _signInManager.SignOutAsync();
       return RedirectToAction("Index", "Home");
     }
-    public ActionResult Index()
-    {
-      // string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-      // AppUser currentUser = await _userManager.FindByIdAsync(userId);
-      // if (currentUser != null)
-      // {
-      //   return View(currentUser);
-      // }
-      return View();
-    }
 
-    [HttpPost]
-    public async Task<IActionResult> Edit(string Email, string UserName)
+    public async Task<IActionResult> Index(LoginViewModel model)
     {
       string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-      AppUser userToUpdate = await _userManager.FindByIdAsync(userId);
-      userToUpdate.UserName = UserName;
-      userToUpdate.Email = Email;
-      IdentityResult result = await _userManager.UpdateAsync(userToUpdate);
-      return RedirectToAction("Index");
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      if (currentUser != null)
+      {
+        return View(currentUser);
+      }
+      return View(currentUser);
     }
+
+
+    // [HttpPost]
+    // public async Task<IActionResult> Edit(string Email, string UserName)
+    // {
+    //   string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    //   AppUser userToUpdate = await _userManager.FindByIdAsync(userId);
+    //   userToUpdate.UserName = UserName;
+    //   userToUpdate.Email = Email;
+    //   IdentityResult result = await _userManager.UpdateAsync(userToUpdate);
+    //   return RedirectToAction("Index");
+    // }
   }
 }

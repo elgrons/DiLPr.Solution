@@ -28,17 +28,22 @@
                         </li>
 
                         <div>
-                            @if (User.Identity.IsAuthenticated) {
-                            <p>Hello <span class="highlighted">@User.Identity.Name</span></p>
-                            @using (Html.BeginForm("LogOff", "Account"))
-                            {
-                                <button type="submit">Log out</button>
-                            }
-                        } else {
-                            <a href="/Account">
-                                <button>Log in / Register</button>
-                            </a>
-                        }
+                            @if (User.Identity.IsAuthenticated)
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Profile">View Profile</a>
+                                    </li>
+                                    <p>Hello @User.Identity.Name!</p>
+                                    @using (Html.BeginForm("LogOff", "Account"))
+                                    {
+                                        <button type="submit" class="red">Log out</button>
+                                    }
+                                }
+                                else
+                                {
+                                    <button onclick="showModal('login')">Log in</button>
+                                    <button onclick="showModal('register')">Register</button>
+                                }
                         </div>
 
                     </ul>
@@ -49,6 +54,8 @@
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
+            @await Html.PartialAsync("LoginModal")
+            @await Html.PartialAsync("RegisterModal")
         </main>
     </div>
 
