@@ -42,40 +42,6 @@ namespace DiLPr.Controllers
         return View(model);
       }
     }
-
-    // [HttpPost]
-    // public async Task<IActionResult> Login(LoginViewModel model)
-    // {
-    //   AppUser user = await _userManager.FindByEmailAsync(model.Email);
-    //   if (user != null)
-    //   {
-    //     Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user, model.Password, isPersistent: true, lockoutOnFailure: false);
-    //     if (result.Succeeded)
-    //     {
-    //       return RedirectToAction("Index");
-    //     }
-    //     else
-    //     {
-    //       ModelState.AddModelError("", "Whoopsies! There is something wrong with your email or username. Please try again.");
-    //       return View(model);
-    //     }
-
-    //   }
-    //   else
-    //   {
-    //     Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(userName: model.Email, model.Password, isPersistent: true, lockoutOnFailure: false);
-    //     if (result.Succeeded)
-    //     {
-    //       return RedirectToAction("Index");
-    //     }
-    //     else
-    //     {
-    //       ModelState.AddModelError("", "Whoops! There is something wrong with your email or username. Please try again.");
-    //       return View(model);
-    //     }
-    //   }
-    // }
-
     public ActionResult Login()
     {
       return View();
