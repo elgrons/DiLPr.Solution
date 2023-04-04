@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Razieleron\\Desktop\\Coding\\Epicodus\\team-week-2\\DiLPr.Solution\\DiLPr\\DiLPr.csproj": {}
+    "C:\\Users\\Razieleron\\Desktop\\CODING\\epicodus\\team-week-2\\DiLPr.Solution\\DiLPr\\DiLPr.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Razieleron\\Desktop\\Coding\\Epicodus\\team-week-2\\DiLPr.Solution\\DiLPr\\DiLPr.csproj": {
+    "C:\\Users\\Razieleron\\Desktop\\CODING\\epicodus\\team-week-2\\DiLPr.Solution\\DiLPr\\DiLPr.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Razieleron\\Desktop\\Coding\\Epicodus\\team-week-2\\DiLPr.Solution\\DiLPr\\DiLPr.csproj",
+        "projectUniqueName": "C:\\Users\\Razieleron\\Desktop\\CODING\\epicodus\\team-week-2\\DiLPr.Solution\\DiLPr\\DiLPr.csproj",
         "projectName": "DiLPr",
-        "projectPath": "C:\\Users\\Razieleron\\Desktop\\Coding\\Epicodus\\team-week-2\\DiLPr.Solution\\DiLPr\\DiLPr.csproj",
+        "projectPath": "C:\\Users\\Razieleron\\Desktop\\CODING\\epicodus\\team-week-2\\DiLPr.Solution\\DiLPr\\DiLPr.csproj",
         "packagesPath": "C:\\Users\\Razieleron\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Razieleron\\Desktop\\Coding\\Epicodus\\team-week-2\\DiLPr.Solution\\DiLPr\\obj\\",
+        "outputPath": "C:\\Users\\Razieleron\\Desktop\\CODING\\epicodus\\team-week-2\\DiLPr.Solution\\DiLPr\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Razieleron\\AppData\\Roaming\\NuGet\\NuGet.Config"

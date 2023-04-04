@@ -1,0 +1,25 @@
+@{
+  Layout = "_Layout";
+}
+
+@using DiLPr.Models
+@model DiLPr.Models.Profile
+
+<h2>Profile Details</h2>
+
+@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)
+@Html.DisplayNameFor(model => model.Breed): @Html.DisplayFor(model => model.Breed)
+@Html.DisplayNameFor(model => model.Age): @Html.DisplayFor(model => model.Age)
+@Html.DisplayNameFor(model => model.Details): @Html.DisplayFor(model => model.Details)
+
+
+
+<p>This Profile has the following tags</p>
+
+@foreach (TagProfile join in Model.JoinEntities)
+{
+  @Html.ActionLink(join.Tag.Name, "Details", "Tags", new { id = join.TagId }, null)
+}
+
+<br /><br />
+@Html.ActionLink("Add a Tag to Profile", "AddTag", new { id = Model.ProfileId })

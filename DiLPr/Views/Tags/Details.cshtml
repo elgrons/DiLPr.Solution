@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+
+@using DiLPr.Models
+@model DiLPr.Models.Tag
+
+@if(@Model.JoinEntities.Count == 0)
+{
+  <h4>@Html.DisplayFor(model => model.Name) does not belong to any profiles</h4>
+}
+else
+{
+  <h2>Profiles that @Html.DisplayFor(model => model.Name) belongs to:</h2>
+  <ul>
+    @foreach(TagProfile join in Model.JoinEntities)
+    {
+      <li><a href="@Url.Action("Details", "Profiles", new { id = join.ProfileId })">@join.Profile.Name</a></li>
+    }
+  </ul>
+}

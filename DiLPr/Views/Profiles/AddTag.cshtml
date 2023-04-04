@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+
+@model DiLPr.Models.Profile
+
+<h2>Add a tag to @Html.DisplayFor(model => model.Name)</h2>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.ProfileId)
+
+  @Html.Label("Select tag: ")
+  @Html.DropDownList("TagId")
+  <br><br>
+  <input type="submit" value="Save" id="green-button"/>
+}

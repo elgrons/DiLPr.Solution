@@ -34,9 +34,8 @@ namespace DiLPr.Controllers
       {
         Profile newProfile = new Profile();
         newProfile.User = user;
+        newProfile.Name = user.UserName;
         _db.Profiles.Add(newProfile);
-        _db.SaveChanges();
-        user.ProfileId = newProfile.ProfileId;
         _db.SaveChanges();
         return RedirectToAction("Index", "Account");
       }

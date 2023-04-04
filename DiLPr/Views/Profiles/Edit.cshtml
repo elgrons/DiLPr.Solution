@@ -1,0 +1,27 @@
+@{
+  Layout = "_Layout";
+}
+
+@model DiLPr.Models.Profile
+
+<h2>Edit the profile for @Html.DisplayFor(model => model.Name)</h2>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.ProfileId)
+
+  @Html.LabelFor(model => model.Name)
+  @Html.EditorFor(model => model.Name)
+
+  @Html.LabelFor(model => model.Breed)
+  @Html.EditorFor(model => model.Breed)
+
+  @Html.LabelFor(model => model.Age)
+  @Html.EditorFor(model => model.Age)
+
+  @Html.LabelFor(model => model.Details)
+  @Html.TextAreaFor(model => model.Details)
+
+  <br><br>
+  <input type="submit" value="Save" id="green-button"/>
+}

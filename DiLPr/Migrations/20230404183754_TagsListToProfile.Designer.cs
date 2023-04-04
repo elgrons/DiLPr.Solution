@@ -3,6 +3,7 @@ using System;
 using DiLPr.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DiLPr.Migrations
 {
     [DbContext(typeof(DiLPrContext))]
-    partial class DiLPrContextModelSnapshot : ModelSnapshot
+    [Migration("20230404183754_TagsListToProfile")]
+    partial class TagsListToProfile
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,12 +87,9 @@ namespace DiLPr.Migrations
 
             modelBuilder.Entity("DiLPr.Models.Image", b =>
                 {
-                    b.Property<int>("ImageId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    b.Property<string>("Caption")
-                        .HasColumnType("longtext");
 
                     b.Property<byte[]>("ImageData")
                         .HasColumnType("longblob");
@@ -98,10 +97,10 @@ namespace DiLPr.Migrations
                     b.Property<string>("ImageTitle")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("ProfileId")
+                    b.Property<int>("ProfileId")
                         .HasColumnType("int");
 
-                    b.HasKey("ImageId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ProfileId");
 
@@ -184,10 +183,15 @@ namespace DiLPr.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int?>("ProfileId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserId")
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("TagId");
+
+                    b.HasIndex("ProfileId");
 
                     b.HasIndex("UserId");
 
@@ -345,11 +349,11 @@ namespace DiLPr.Migrations
 
             modelBuilder.Entity("DiLPr.Models.Image", b =>
                 {
-                    b.HasOne("DiLPr.Models.Profile", "Profile")
+                    b.HasOne("DiLPr.Models.Profile", null)
                         .WithMany("Pictures")
-                        .HasForeignKey("ProfileId");
-
-                    b.Navigation("Profile");
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DiLPr.Models.Profile", b =>
@@ -378,6 +382,10 @@ namespace DiLPr.Migrations
 
             modelBuilder.Entity("DiLPr.Models.Tag", b =>
                 {
+                    b.HasOne("DiLPr.Models.Profile", null)
+                        .WithMany("Tags")
+                        .HasForeignKey("ProfileId");
+
                     b.HasOne("DiLPr.Models.AppUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
@@ -388,7 +396,7 @@ namespace DiLPr.Migrations
             modelBuilder.Entity("DiLPr.Models.TagProfile", b =>
                 {
                     b.HasOne("DiLPr.Models.Profile", "Profile")
-                        .WithMany("JoinEntities")
+                        .WithMany()
                         .HasForeignKey("ProfileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -457,9 +465,9 @@ namespace DiLPr.Migrations
 
             modelBuilder.Entity("DiLPr.Models.Profile", b =>
                 {
-                    b.Navigation("JoinEntities");
-
                     b.Navigation("Pictures");
+
+                    b.Navigation("Tags");
                 });
 
             modelBuilder.Entity("DiLPr.Models.Tag", b =>

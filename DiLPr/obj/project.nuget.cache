@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XSOtOe9SFYGPKs4kQOkuAe0EowfsnGshcKn7IgcTDeB7VBgccK7aQtlfAPwDy492FF20pYc70jQfHxFz38N/1w==",
+  "dgSpecHash": "Q14pK1ZEZ+J1Rorb0M5WoH/Z8s70ueEKCF+YvvpRXpNt7EtM6xxAxslWTLg/+KCeoWWYz47IzT0fIDFOaS63ww==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Razieleron\\Desktop\\Coding\\Epicodus\\team-week-2\\DiLPr.Solution\\DiLPr\\DiLPr.csproj",
+  "projectFilePath": "C:\\Users\\Razieleron\\Desktop\\CODING\\epicodus\\team-week-2\\DiLPr.Solution\\DiLPr\\DiLPr.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Razieleron\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Razieleron\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.0\\microsoft.aspnetcore.cryptography.internal.6.0.0.nupkg.sha512",

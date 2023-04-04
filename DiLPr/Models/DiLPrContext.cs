@@ -14,5 +14,7 @@ namespace DiLPr.Models
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Puppr> Pupprs { get; set; }
         public DbSet<Image> Images { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<TagProfile> TagProfiles { get; set; }
     }
 }
