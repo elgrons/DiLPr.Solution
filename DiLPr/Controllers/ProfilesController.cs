@@ -110,15 +110,17 @@ namespace DiLPr.Controllers
             .FirstOrDefault(profile => profile.ProfileId == id);
 
       List<Image> imgList = _db.Images.Where(entry=> entry.Profile == thisProfile).ToList();
+      // List<Image> imgList = _db.Images.ToList();
       ViewBag.Images = new Dictionary < string, string > ();
       foreach(Image img in imgList)
       {
         string imageBase64Data = Convert.ToBase64String(img.ImageData);
-        string imageDataURL = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+        // string imageDataURL = string.Format("data:image/jpg;base64", imageBase64Data);
         //specific to jpg?? need to figure out how to make applicable to others
-        ViewBag.Images.Add($"{img.Caption}",imageDataURL);
-      }
+        ViewBag.Images.Add(img.ImageTitle,imageBase64Data);
 
+      }
+      
       return View(thisProfile);
     }
 

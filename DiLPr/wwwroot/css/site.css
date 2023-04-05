@@ -433,3 +433,10 @@ form > .form-row, .info-row {
 #profile-tag-list {
   display: inline;
 }
+
+img
+{
+  width: 400px;
+  height: 600px;
+  padding: 20px;
+}

@@ -6,8 +6,15 @@
 @model DiLPr.Models.Profile
 
 <div id="profile">
-  <h1>@Model.Name - @Model.Age</h1>
+  <h1>@Model.Name - @Model.Age years old</h1>
   <h3>@Model.Breed</h3>
+  <br>
+  @foreach (KeyValuePair<string, string> entry in ViewBag.Images)
+  {
+    <img src="data:image/jpg;base64,@entry.Value" alt="Profile Image" />
+    
+  }
+
   <br>
   <h5>About me</h5>
   <p>@Model.Details</p>
