@@ -26,6 +26,8 @@ public class Profile
   public string Breed { get; set; }
   public int Age { get; set; }
   public string Details { get; set; }
+  //public Dictionary {profile id, bool}
+  // 3, t..........4, f........5, t....
   public List<TagProfile> JoinEntities { get; set; }
   public List<Image> Pictures { get; set; } 
 }

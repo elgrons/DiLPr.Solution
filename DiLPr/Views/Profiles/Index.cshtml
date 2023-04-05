@@ -9,6 +9,15 @@
     <h1>@Model.Name - @Model.Age years old</h1>
     <h3>@Model.Breed</h3>
     <br>
+    @if(ViewBag.Images.Count > 0)
+    {
+        @foreach (KeyValuePair<int, string> entry in ViewBag.Images)
+        {
+        <img src="data:image/jpg;base64,@entry.Value" alt="Profile Image" class="profileImg"/>
+        
+        }
+    }
+    <br>
     <h5>About me</h5>
     <p>@Model.Details</p>
     <br><br>

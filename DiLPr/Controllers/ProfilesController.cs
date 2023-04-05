@@ -47,13 +47,15 @@ namespace DiLPr.Controllers
             .FirstAsync(profile => profile.User == user);
 
       List<Image> imgList = _db.Images.Where(entry=> entry.Profile == thisProfile).ToList();
-      ViewBag.Images = new Dictionary < string, string > ();
+      ViewBag.Images = new Dictionary < int, string > ();
+      int i = 0;
       foreach(Image img in imgList)
       {
         string imageBase64Data = Convert.ToBase64String(img.ImageData);
-        string imageDataURL = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+        // string imageDataURL = string.Format("data:image/jpg;base64", imageBase64Data);
         //specific to jpg?? need to figure out how to make applicable to others
-        ViewBag.Images.Add($"{img.Caption}",imageDataURL);
+        ViewBag.Images.Add(i,imageBase64Data);
+        i++;
       }
 
       return View(thisProfile);
@@ -111,36 +113,63 @@ namespace DiLPr.Controllers
 
       List<Image> imgList = _db.Images.Where(entry=> entry.Profile == thisProfile).ToList();
       // List<Image> imgList = _db.Images.ToList();
-      ViewBag.Images = new Dictionary < string, string > ();
+      ViewBag.Images = new Dictionary < int, string > ();
+      int i = 0;
       foreach(Image img in imgList)
       {
-        string imageBase64Data = Convert.ToBase64String(img.ImageData);
+        string fish = Convert.ToBase64String(img.ImageData);
         // string imageDataURL = string.Format("data:image/jpg;base64", imageBase64Data);
         //specific to jpg?? need to figure out how to make applicable to others
-        ViewBag.Images.Add(img.ImageTitle,imageBase64Data);
-
+        ViewBag.Images.Add(i,fish);
+        i++;
       }
       
       return View(thisProfile);
     }
 
+    // public ActionResult AddTag(int id)
+    // {
+    //   Profile thisProfile = _db.Profiles.FirstOrDefault(profile => profile.ProfileId == id);
+    //   ViewBag.TagId = new SelectList(_db.Tags, "TagId", "Name");
+    //   // ViewBag.Tags = _db.Tags.ToList();
+    //   return View(thisProfile);
+    // }
+
+    // [HttpPost]
+    // public ActionResult AddTag(Profile profile, int tagId)
+    // {
+    //   #nullable enable
+    //   TagProfile? joinEntity = _db.TagProfiles.FirstOrDefault(join => (join.TagId == tagId && join.ProfileId == profile.ProfileId));
+    //   #nullable disable
+    //   if (joinEntity == null && tagId != 0)
+    //   {
+    //     _db.TagProfiles.Add(new TagProfile() { TagId = tagId, ProfileId = profile.ProfileId });
+    //     _db.SaveChanges();
+    //   }
+    //   return RedirectToAction("Index");
+    // }
+
     public ActionResult AddTag(int id)
     {
-      Profile thisProfile = _db.Profiles.FirstOrDefault(profile => profile.ProfileId == id);
-      ViewBag.TagId = new SelectList(_db.Tags, "TagId", "Name");
+      Profile thisProfile = _db.Profiles.FirstOrDefault(entry => entry.ProfileId == id);
+      ViewBag.Tags = _db.Tags.ToList();
       return View(thisProfile);
     }
-
+    
     [HttpPost]
-    public ActionResult AddTag(Profile profile, int tagId)
+    public ActionResult AddTag(List<int> tags, int profileId)
     {
-      #nullable enable
-      TagProfile? joinEntity = _db.TagProfiles.FirstOrDefault(join => (join.TagId == tagId && join.ProfileId == profile.ProfileId));
-      #nullable disable
-      if (joinEntity == null && tagId != 0)
+      foreach (int tag in tags)
       {
-        _db.TagProfiles.Add(new TagProfile() { TagId = tagId, ProfileId = profile.ProfileId });
-        _db.SaveChanges();
+        #nullable enable
+        TagProfile? join = _db.TagProfiles.FirstOrDefault(entry => (entry.TagId == tag && entry.ProfileId == profileId));
+        #nullable disable
+
+        if (join == null && profileId != 0)
+        {
+          _db.TagProfiles.Add(new TagProfile() { TagId = tag, ProfileId = profileId});
+          _db.SaveChanges();
+        }
       }
       return RedirectToAction("Index");
     }

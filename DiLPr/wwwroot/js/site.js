@@ -50,16 +50,18 @@ function animationdone(ev) {
 
   if (ev.animationName === "yay") {
     if (ev.target.classList.contains("but-yay")) {
+      origin.classList.remove("nope");
       origin.classList.remove("yes");
-      origin.classList.remove("rotate-left");
-      origin.classList.add("rotate-right");
+      // origin.classList.remove("rotate-left");
+      // origin.classList.add("rotate-right");
     }
   }
   if (ev.animationName === "nope") {
-    if (ev.target.classList.contains("nope")) {
+    if (ev.target.classList.contains("but-nope")) {
       origin.classList.remove("nope");
-      origin.classList.remove("rotate-right");
-      origin.classList.add("rotate-left");
+      origin.classList.remove("yes");
+      // origin.classList.remove("rotate-right");
+      // origin.classList.add("rotate-left");
     }
   }
 }
