@@ -34,6 +34,7 @@ namespace DiLPr.Controllers
       {
         Profile newProfile = new Profile();
         newProfile.User = user;
+        newProfile.Name = user.UserName;
         _db.Profiles.Add(newProfile);
         _db.SaveChanges();
         return RedirectToAction("Index", "Account");
@@ -69,7 +70,7 @@ namespace DiLPr.Controllers
         }
         else
         {
-          ModelState.AddModelError("", "There is something wrong with your email or username. Please try again.");
+          ModelState.AddModelError("", "There is something wrong with your email or password. Please try again.");
           return View(model);
         }
       }

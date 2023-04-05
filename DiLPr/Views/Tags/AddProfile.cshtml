@@ -1,0 +1,19 @@
+@{
+    ViewData["Title"] = $"Add {Model.Name}";
+}
+
+@model DiLPr.Models.Tag
+
+<h2>Know who likes @Html.DisplayFor(model => model.Name)?</h2>
+<br>
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.TagId)
+
+  @Html.DropDownList("ProfileId")
+  @Html.Label($"likes {Model.Name}!")
+  <br><br>
+  <input type="submit" value="Save" id="green-button"/>
+}
+<br>
+<p>@Html.ActionLink("Cancel", "Details", new { id = @Model.TagId })</p>

@@ -1,0 +1,18 @@
+@{
+      ViewData["Title"] = "Add a Profile Photo";
+}
+
+<h2>Add a profile photo</h2>
+
+<form asp-action="UploadImage" 
+      asp-controller="Profiles" 
+      method="post" 
+      enctype="multipart/form-data">
+      <input type="file" id="file1" 
+      name="file1" 
+      multiple="multiple" />
+      <br>
+      <button type="submit">Upload File(s)</button>
+</form>
+<br>
+<p>@Html.ActionLink("Not right now", "Index")</p>

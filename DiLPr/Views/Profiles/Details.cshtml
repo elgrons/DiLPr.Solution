@@ -1,0 +1,27 @@
+@{
+    ViewData["Title"] = $"{Model.Name}'s Profile";
+}
+
+@using DiLPr.Models
+@model DiLPr.Models.Profile
+
+<div id="profile">
+  <h1>@Model.Name - @Model.Age</h1>
+  <h3>@Model.Breed</h3>
+  <br>
+  <h5>About me</h5>
+  <p>@Model.Details</p>
+  <br><br>
+  <h5>Interests</h5>
+
+  <ul id="profile-tag-list">
+  @foreach (TagProfile join in Model.JoinEntities)
+  {
+    <li id="profile-tag">
+      @Html.ActionLink(join.Tag.Name, "Details", "Tags", new { id = join.TagId }, null)
+    </li>
+  }
+  </ul>
+</div>
+<br>
+<span id="profile-links">@Html.ActionLink("Back to browse", "Index", "Tags")</span>

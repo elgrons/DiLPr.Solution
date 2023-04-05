@@ -1,20 +1,34 @@
 @{
-    ViewData["Title"] = "Profile Index";
+    ViewData["Title"] = "My Profile";
 }
 
-@model DiLPr.Models.AppUser
+@using DiLPr.Models
+@model DiLPr.Models.Profile
 
-<div id="page-content">
-  @if (User.Identity.IsAuthenticated)
-  {
-    <h2 style="font-size: 40px;">Hello @User.Identity.Name</h2>
-  } 
+<div id="profile">
+    <h1>@Model.Name - @Model.Age</h1>
+    <h3>@Model.Breed</h3>
+    <br>
+    <h5>About me</h5>
+    <p>@Model.Details</p>
+    <br><br>
+    <h5>Interests</h5>
 
-  else
-  {
-      <h5>@Html.ActionLink("Create an account", "Register")</h5>
-      <h5>@Html.ActionLink("Log in", "Login")</h5>
-  }
-
-  <a>here you ARE!!!!</a>
+    <ul id="profile-tag-list">
+    @foreach (TagProfile join in Model.JoinEntities)
+    {
+        <li id="profile-tag">
+            @Html.ActionLink(join.Tag.Name, "Details", "Tags", new { id = join.TagId }, null)
+            @using (Html.BeginForm("DeleteJoin", "Tags", new { joinId = join.TagProfileId }))
+            {
+                <button type="submit" id="tiny-btn">x</button>
+            }
+        </li>
+    }
+    </ul>
 </div>
+<br /><br />
+@Html.ActionLink("Add an Interest", "AddTag", new { id = Model.ProfileId })
+
+<span id="profile-links">@Html.ActionLink("Edit Profile", "Edit", new { id = Model.ProfileId })</span>
+<span id="profile-links">@Html.ActionLink("Add a Profile Picture", "UploadImage", new { id = Model.ProfileId })</span>

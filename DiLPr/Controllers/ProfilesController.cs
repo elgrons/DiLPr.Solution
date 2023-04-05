@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Security.Claims;
 using System;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DiLPr.Controllers
 {
@@ -25,19 +26,53 @@ namespace DiLPr.Controllers
     }
 
 
-    // public IActionResult UploadImage(int id)
-    // {
-    //   Profile targetProfile = 
-    //   return View(targetProfile);
-    // }
+    public async Task<IActionResult> UploadImage(int id)
+    {
+      string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      AppUser user = await _userManager.FindByIdAsync(userId);
+      Profile targetProfile = await _db.Profiles.FirstAsync(entry => entry.User == user);
+      return View(targetProfile);
+    }
+
+    public async Task<ActionResult> Index()
+    {
+      string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      AppUser user = await _userManager.FindByIdAsync(userId);
+      // Profile targetProfile = await _db.Profiles.FirstAsync(entry => entry.User == user);
+      // return View(targetProfile);
+
+      Profile thisProfile = await _db.Profiles
+            .Include(profile => profile.JoinEntities)
+            .ThenInclude(join => join.Tag)
+            .FirstAsync(profile => profile.User == user);
+
+      List<Image> imgList = _db.Images.Where(entry=> entry.Profile == thisProfile).ToList();
+      ViewBag.Images = new Dictionary < string, string > ();
+      foreach(Image img in imgList)
+      {
+        string imageBase64Data = Convert.ToBase64String(img.ImageData);
+        string imageDataURL = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+        //specific to jpg?? need to figure out how to make applicable to others
+        ViewBag.Images.Add($"{img.Caption}",imageDataURL);
+      }
+
+      return View(thisProfile);
+    }
 
     [HttpPost]
-    public IActionResult UploadImage()
+    public async Task<IActionResult> UploadImage()
     {
+      string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      AppUser user = await _userManager.FindByIdAsync(userId);
+      Profile currentProfile = await _db.Profiles.FirstAsync(entry => entry.User == user);      
+      
       foreach (var file in Request.Form.Files)
       {
+        
+        //set the profileId attribute based on the previously defined profile object
         Image img = new Image();
         img.ImageTitle = file.FileName;
+        img.Profile = currentProfile;
 
         MemoryStream ms = new MemoryStream();
         file.CopyTo(ms);
@@ -49,79 +84,63 @@ namespace DiLPr.Controllers
         _db.Images.Add(img);
         _db.SaveChanges();
       }
-      ViewBag.Message = "Image(s) stored in   database!";
-      return View("Index");
+      ViewBag.Message = "Image(s) stored in database!";
+      return RedirectToAction("Index");
     }
 
-    public async Task<ActionResult> Index()
-    { 
-      string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-      AppUser currentUser = await _userManager.FindByIdAsync(userId);
-      if (currentUser != null)
+    public ActionResult Edit(int id)
+    {
+      Profile thisProfile = _db.Profiles.FirstOrDefault(profile => profile.ProfileId == id);
+      return View(thisProfile);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Profile profile)
+    {
+      _db.Profiles.Update(profile);
+      _db.SaveChanges();
+      return RedirectToAction("UploadImage", "Profiles");
+    }
+
+    public ActionResult Details(int id)
+    {
+      Profile thisProfile = _db.Profiles
+            .Include(profile => profile.JoinEntities)
+            .ThenInclude(join => join.Tag)
+            .FirstOrDefault(profile => profile.ProfileId == id);
+
+      List<Image> imgList = _db.Images.Where(entry=> entry.Profile == thisProfile).ToList();
+      ViewBag.Images = new Dictionary < string, string > ();
+      foreach(Image img in imgList)
       {
-        return View(currentUser);
+        string imageBase64Data = Convert.ToBase64String(img.ImageData);
+        string imageDataURL = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
+        //specific to jpg?? need to figure out how to make applicable to others
+        ViewBag.Images.Add($"{img.Caption}",imageDataURL);
       }
-      return View();
 
-      // AppUser user = ;
-      // Profile thisProfile = _db.Profiles
-      //   .Where(e => e.User.UserName == user.UserName)
-      // return View();
+      return View(thisProfile);
     }
 
-    // public ActionResult Details(int id)
-    // {
-    //   ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "MachineName");
-    //   Engineer thisEngineer = _db.Engineers
-    //       .Include(engineer => engineer.JoinEntities)
-    //       .ThenInclude(join => join.Machine)
-    //       .FirstOrDefault(engineer => engineer.EngineerId == id);
-    //   return View(thisEngineer);
-    // }
+    public ActionResult AddTag(int id)
+    {
+      Profile thisProfile = _db.Profiles.FirstOrDefault(profile => profile.ProfileId == id);
+      ViewBag.TagId = new SelectList(_db.Tags, "TagId", "Name");
+      return View(thisProfile);
+    }
 
-    // public ActionResult Edit(int id)
-    // {
-    //   Engineer thisEngineer = _db.Engineers.FirstOrDefault(engineers => engineers.EngineerId == id);
-    //   return View(thisEngineer);
-    // }
-
-    // [HttpPost]
-    // public ActionResult Edit(Engineer engineer)
-    // {
-    //   if (!ModelState.IsValid)
-    //   {
-    //     return View(engineer);
-    //   }
-    //   else
-    //   {
-    //     _db.Engineers.Update(engineer);
-    //     _db.SaveChanges();
-    //     return RedirectToAction("Index");
-    //   }
-    // }
-
-    // public ActionResult Delete(int id)
-    // {
-    //   Profile thisProfile = _db.Engineers.FirstOrDefault(engineers => engineers.EngineerId == id);
-    //   return View(thisEngineer);
-    // }
-
-    // [HttpPost, ActionName("Delete")]
-    // public ActionResult DeleteConfirmed(int id)
-    // {
-    //   Engineer thisEngineer = _db.Engineers.FirstOrDefault(engineers => engineers.EngineerId == id);
-    //   _db.Engineers.Remove(thisEngineer);
-    //   _db.SaveChanges();
-    //   return RedirectToAction("Index");
-    // }
-
-    // [HttpPost]
-    // public ActionResult DeleteJoin(int joinId)
-    // {
-    //   EngineerMachine joinEntry = _db.EngineerMachines.FirstOrDefault(entry => entry.EngineerMachineId == joinId);
-    //   _db.EngineerMachines.Remove(joinEntry);
-    //   _db.SaveChanges();
-    //   return RedirectToAction("Index");
-    // }
+    [HttpPost]
+    public ActionResult AddTag(Profile profile, int tagId)
+    {
+      #nullable enable
+      TagProfile? joinEntity = _db.TagProfiles.FirstOrDefault(join => (join.TagId == tagId && join.ProfileId == profile.ProfileId));
+      #nullable disable
+      if (joinEntity == null && tagId != 0)
+      {
+        _db.TagProfiles.Add(new TagProfile() { TagId = tagId, ProfileId = profile.ProfileId });
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Index");
+    }
   }
 }

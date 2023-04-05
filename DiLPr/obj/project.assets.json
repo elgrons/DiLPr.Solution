@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {
+    "net7.0": {
       "Humanizer.Core/2.8.26": {
         "type": "package",
         "compile": {
@@ -1022,7 +1022,7 @@
     }
   },
   "projectFileDependencyGroups": {
-    "net6.0": [
+    "net7.0": [
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 6.0.0",
       "Microsoft.EntityFrameworkCore >= 6.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 6.0.0",
@@ -1032,29 +1032,29 @@
     ]
   },
   "packageFolders": {
-    "/Users/eliotgronstal/.nuget/packages/": {}
+    "/Users/eluckie/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/eliotgronstal/Desktop/Epicodus/DiLPr.Solution/DiLPr/DiLPr.csproj",
+      "projectUniqueName": "/Users/eluckie/Desktop/DiLPr.Solution/DiLPr/DiLPr.csproj",
       "projectName": "DiLPr",
-      "projectPath": "/Users/eliotgronstal/Desktop/Epicodus/DiLPr.Solution/DiLPr/DiLPr.csproj",
-      "packagesPath": "/Users/eliotgronstal/.nuget/packages/",
-      "outputPath": "/Users/eliotgronstal/Desktop/Epicodus/DiLPr.Solution/DiLPr/obj/",
+      "projectPath": "/Users/eluckie/Desktop/DiLPr.Solution/DiLPr/DiLPr.csproj",
+      "packagesPath": "/Users/eluckie/.nuget/packages/",
+      "outputPath": "/Users/eluckie/Desktop/DiLPr.Solution/DiLPr/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/eliotgronstal/.nuget/NuGet/NuGet.Config"
+        "/Users/eluckie/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
-        "net6.0"
+        "net7.0"
       ],
       "sources": {
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "projectReferences": {}
         }
       },
@@ -1065,8 +1065,8 @@
       }
     },
     "frameworks": {
-      "net6.0": {
-        "targetAlias": "net6.0",
+      "net7.0": {
+        "targetAlias": "net7.0",
         "dependencies": {
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
             "target": "Package",
@@ -1114,7 +1114,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.402/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/Cellar/dotnet/7.0.100/libexec/sdk/7.0.100/RuntimeIdentifierGraph.json"
       }
     }
   }
