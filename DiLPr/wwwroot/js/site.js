@@ -45,25 +45,12 @@ function animatecard(ev) {
 document.body.addEventListener("click", animatecard);
 
 function animationdone(ev) {
-  // get the container
-  var origin = ev.target.parentNode;
-
-  if (ev.animationName === "yay") {
-    if (ev.target.classList.contains("but-yay")) {
-      origin.classList.remove("nope");
-      origin.classList.remove("yes");
-      // origin.classList.remove("rotate-left");
-      // origin.classList.add("rotate-right");
-    }
-  }
-  if (ev.animationName === "nope") {
-    if (ev.target.classList.contains("but-nope")) {
-      origin.classList.remove("nope");
-      origin.classList.remove("yes");
-      // origin.classList.remove("rotate-right");
-      // origin.classList.add("rotate-left");
-    }
-  }
+  var origin = ev.target.parentNode.parentNode;
+  origin.classList.remove("nope");
+  origin.classList.remove("yes");
 }
 
+document.body.addEventListener(
+  'animationend', animationdone
+);
 document.body.addEventListener("animationend", animationdone);
