@@ -10,13 +10,26 @@
 
   <div class="cardcontainer list">
     <ul class="cardlist">
-      <li class="card current">#1
-      </li>
-      <li class="card">#2</li>
-      <li class="card">#3</li>
-      <li class="card">#4</li>
-      <li class="card">#5</li>
-      <li class="card">#6</li>
+      <div class="dog-profile">
+        @for(int i=0; i < 1; i++)
+        {
+          <li class="card current">
+            <h2>@ViewBag.Profiles[i].Name</h2>
+            <p>@ViewBag.Profiles[i].Age years old</p>
+            <p>About Me:<br>@ViewBag.Profiles[i].Details</p>
+            <p>@Html.ActionLink("See More", "Details", "Profiles", new { id = @ViewBag.Profiles[i].ProfileId })</p>
+          </li>
+        }
+        @for(int i=1; i<@ViewBag.Profiles.Count; i++)
+        {
+          <li class="card">
+            <h2>@ViewBag.Profiles[i].Name</h2>
+            <p>@ViewBag.Profiles[i].Age years old</p>
+            <p>About Me:<br>@ViewBag.Profiles[i]Details</p>
+            <p>@Html.ActionLink("See More", "Details", "Profiles", new { id = @ViewBag.Profiles[i].ProfileId })</p>
+          </li>
+        }
+      </div>      
     </ul>
     <button class="but-nope">❌</button>
     <button class="but-yay">✔️</button>

@@ -127,28 +127,6 @@ namespace DiLPr.Controllers
       return View(thisProfile);
     }
 
-    // public ActionResult AddTag(int id)
-    // {
-    //   Profile thisProfile = _db.Profiles.FirstOrDefault(profile => profile.ProfileId == id);
-    //   ViewBag.TagId = new SelectList(_db.Tags, "TagId", "Name");
-    //   // ViewBag.Tags = _db.Tags.ToList();
-    //   return View(thisProfile);
-    // }
-
-    // [HttpPost]
-    // public ActionResult AddTag(Profile profile, int tagId)
-    // {
-    //   #nullable enable
-    //   TagProfile? joinEntity = _db.TagProfiles.FirstOrDefault(join => (join.TagId == tagId && join.ProfileId == profile.ProfileId));
-    //   #nullable disable
-    //   if (joinEntity == null && tagId != 0)
-    //   {
-    //     _db.TagProfiles.Add(new TagProfile() { TagId = tagId, ProfileId = profile.ProfileId });
-    //     _db.SaveChanges();
-    //   }
-    //   return RedirectToAction("Index");
-    // }
-
     public ActionResult AddTag(int id)
     {
       Profile thisProfile = _db.Profiles.FirstOrDefault(entry => entry.ProfileId == id);
@@ -173,5 +151,7 @@ namespace DiLPr.Controllers
       }
       return RedirectToAction("Index");
     }
+
+    /* */
   }
 }
