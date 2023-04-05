@@ -23,17 +23,20 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-
-                        <div>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Tags" asp-action="Index">Local Hot Shots</a>
+                        </li>
                             @if (User.Identity.IsAuthenticated)
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Profiles" asp-action="Index">View Profile</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Profiles" asp-action="Index">View My Profile</a>
                                     </li>
+                                    
                                     @using (Html.BeginForm("LogOff", "Account"))
                                     {
                                         <button type="submit" class="red">Log out</button>
                                     }
+                                    
                                 }
                                 else
                                 {
@@ -41,8 +44,6 @@
                                         <button>Account</button>
                                     </a>
                                 }
-                        </div>
-
                     </ul>
                 </div>
             </div>

@@ -1,30 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "/Users/eliotgronstal/Desktop/Epicodus/DiLPr.Solution/DiLPr/DiLPr.csproj": {}
+    "/Users/eluckie/Desktop/DiLPr.Solution/DiLPr/DiLPr.csproj": {}
   },
   "projects": {
-    "/Users/eliotgronstal/Desktop/Epicodus/DiLPr.Solution/DiLPr/DiLPr.csproj": {
+    "/Users/eluckie/Desktop/DiLPr.Solution/DiLPr/DiLPr.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/eliotgronstal/Desktop/Epicodus/DiLPr.Solution/DiLPr/DiLPr.csproj",
+        "projectUniqueName": "/Users/eluckie/Desktop/DiLPr.Solution/DiLPr/DiLPr.csproj",
         "projectName": "DiLPr",
-        "projectPath": "/Users/eliotgronstal/Desktop/Epicodus/DiLPr.Solution/DiLPr/DiLPr.csproj",
-        "packagesPath": "/Users/eliotgronstal/.nuget/packages/",
-        "outputPath": "/Users/eliotgronstal/Desktop/Epicodus/DiLPr.Solution/DiLPr/obj/",
+        "projectPath": "/Users/eluckie/Desktop/DiLPr.Solution/DiLPr/DiLPr.csproj",
+        "packagesPath": "/Users/eluckie/.nuget/packages/",
+        "outputPath": "/Users/eluckie/Desktop/DiLPr.Solution/DiLPr/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/eliotgronstal/.nuget/NuGet/NuGet.Config"
+          "/Users/eluckie/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net7.0"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {}
           }
         },
@@ -35,8 +35,8 @@
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
@@ -84,7 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.402/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/Cellar/dotnet/7.0.100/libexec/sdk/7.0.100/RuntimeIdentifierGraph.json"
         }
       }
     }

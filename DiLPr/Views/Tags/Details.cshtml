@@ -1,0 +1,24 @@
+@{
+    ViewData["Title"] = $"{Model.Name}";
+}
+
+@using DiLPr.Models
+@model DiLPr.Models.Tag
+
+@if(@Model.JoinEntities.Count == 0)
+{
+  <h4>Nobody likes @Html.DisplayFor(model => model.Name).</h4>
+}
+else
+{
+  <h2>Pups who like @Html.DisplayFor(model => model.Name)</h2>
+  <ul>
+    @foreach(TagProfile join in Model.JoinEntities)
+    {
+      <li><a href='@Url.Action("Details", "Profiles", new { id = join.ProfileId })'><h5>@join.Profile.Name</h5></a></li>
+    }
+  </ul>
+}
+<br>
+<span id="profile-links">@Html.ActionLink("Add interest to profile", "AddProfile", new { id = @Model.TagId })</span>
+<span id="profile-links">@Html.ActionLink("Back to browse", "Index")</span>

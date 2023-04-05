@@ -1,0 +1,17 @@
+@{
+    ViewData["Title"] = "Add an interest";
+}
+
+@model DiLPr.Models.Profile
+
+<h2>Know what @Html.DisplayFor(model => model.Name) likes?</h2>
+<br>
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.ProfileId)
+
+  @Html.DropDownList("TagId")
+  @Html.Label("that's what they like to do!")
+  <br><br>
+  <input type="submit" value="Add interest" id="green-button"/>
+}

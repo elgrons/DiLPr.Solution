@@ -2,8 +2,9 @@ namespace DiLPr.Models;
 
 public class Image
 {
-    public int Id { get; set; }
-    public int ProfileId {get;set;}
+    public int ImageId { get; set; }
+    public Profile Profile { get; set; } 
+    public string Caption {get;set;}
     public string ImageTitle { get; set; }
     public byte[] ImageData { get; set; }
 }

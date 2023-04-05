@@ -1,19 +1,18 @@
+@{
+    ViewData["Title"] = "Log In";
+}
+
 @await Html.PartialAsync("LoginModal")
 @await Html.PartialAsync("RegisterModal")
 
 @model DiLPr.Models.AppUser
 
-<div id="page-content">
-  @if (User.Identity.IsAuthenticated)
-  {
-    <h2 style="font-size: 40px;">Hello @User.Identity.Name</h2>
-  } 
-
-  else
-  {
-    <button onclick="showModal('login')">Log in</button>
-    <button onclick="showModal('register')">Register</button>
-  }
-
-  <a>here you goooo!!!!</a>
-</div>
+@if (User.Identity.IsAuthenticated)
+{
+  <h2 style="font-size: 40px;">Hello @User.Identity.Name</h2>
+} 
+else
+{
+  <button onclick="showModal('login')">Log in</button>
+  <button onclick="showModal('register')">Register</button>
+}

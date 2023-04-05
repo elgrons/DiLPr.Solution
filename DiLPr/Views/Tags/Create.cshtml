@@ -1,0 +1,16 @@
+@{
+    ViewData["Title"] = "Add New Interest";
+}
+
+@model DiLPr.Models.Tag
+
+<h4>Add a new interest</h4>
+
+@using (Html.BeginForm())
+{
+  <p>@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", @style = "font-weight: 600; color:red;" })</p>
+  @Html.Label("Please describe interest here")
+  @Html.TextBoxFor(model => model.Name)
+  <br><br>
+  <input type="submit" value="Add interest"/>
+}
