@@ -62,5 +62,3 @@ TBD
 _[MIT](https://opensource.org/license/mit/)_
 
 Copyright (c) _2023_ _Eliot Gronstal, E Luckie, Jannon Sielaff, Brishna Bakshev, Carl Sustrich_
-
-just a little update!
