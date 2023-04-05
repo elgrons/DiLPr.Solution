@@ -73,6 +73,9 @@ namespace DiLPr.Controllers
         
         //set the profileId attribute based on the previously defined profile object
         Image img = new Image();
+
+        
+
         img.ImageTitle = file.FileName;
         img.Profile = currentProfile;
 
@@ -85,6 +88,14 @@ namespace DiLPr.Controllers
 
         _db.Images.Add(img);
         _db.SaveChanges();
+
+        List<Image> imgList = _db.Images.Where(entry=> entry.Profile == currentProfile).ToList();
+          if(imgList.Count == 1)
+          {
+            currentProfile.ProfilePic = img.ImageId;
+          }
+        _db.SaveChanges();
+        
       }
       ViewBag.Message = "Image(s) stored in database!";
       return RedirectToAction("Index");

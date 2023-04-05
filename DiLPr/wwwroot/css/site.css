@@ -85,46 +85,6 @@ button:hover {
   font-weight: bold;
 }
 
-.quote-list {
-  margin: 2rem 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  list-style-type: none;
-  opacity: 1;
-  transition: opacity 200ms ease, transform 100ms ease;
-}
-
-.quote-list.obscured {
-  transition: none;
-  opacity: 0;
-  transform: translateY(1rem);
-}
-
-.quote-list-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 2rem;
-  gap: 1rem;
-  border: 0.1rem solid rgba(0, 0, 0, 0.25);
-  border-radius: var(--border-radius);
-  box-shadow: 0 0 0.1rem 0.1rem rgba(0, 0, 0, 0.05);
-  background-color: #00000011;
-}
-
-.quote-list-item form {
-  min-width: unset;
-  width: unset;
-}
-
-.quote-list-item .quote-text {
-  opacity: 0.9;
-  font-size: 1.5rem;
-  padding: 0.5rem;
-  flex-grow: 1;
-}
-
 .navbar-brand .navbar-light {
   color: var(--main-text-color) !important;
 }
@@ -132,25 +92,6 @@ button:hover {
 .navbar {
   background-color: var(--header-color) !important;
   color: var(--header-text-color) !important;
-}
-
-.quote-list-item .quote-speaker {
-  /* flex-grow: 1; */
-  color: rgb(228, 193, 127);
-  font-weight: bold;
-  padding: 0 1rem;
-}
-
-.quote-list-item > .button-area {
-  width: min-content;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
-  padding: 0;
-}
-.quote-list-item > .button-area button{
-  width: 9rem;
-  padding: 0.5rem 1.5rem;
 }
 
 .modal {
@@ -170,10 +111,6 @@ button:hover {
 	transition: all 300ms ease, opacity 200ms ease;
 	z-index: 1;
 	border-radius: 1rem;
-}
-
-.error-messages {
-	position: absolute;
 }
 
 .modal > .modal-message {

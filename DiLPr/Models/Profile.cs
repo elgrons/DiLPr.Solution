@@ -14,7 +14,7 @@ public class Profile
   // public  List<int> LikedProfiles { get; set; }
   // public List<int> DislikedProfiles { get; set; }
   public List<TagProfile> JoinEntities { get; set; }
-  public List<Image> Pictures { get; set; } 
+  public int ProfilePic { get; set; } 
 }
 
 

@@ -11,24 +11,20 @@
   <div class="cardcontainer list">
     <ul class="cardlist">
       <div class="dog-profile">
-        @for(int i=0; i < 1; i++)
-        {
-          <li class="card current">
-            <h2>@ViewBag.Profiles[i].Name</h2>
-            <p>@ViewBag.Profiles[i].Age years old</p>
-            <p>About Me:<br>@ViewBag.Profiles[i].Details</p>
-            <p>@Html.ActionLink("See More", "Details", "Profiles", new { id = @ViewBag.Profiles[i].ProfileId })</p>
-          </li>
-        }
-        @for(int i=1; i<@ViewBag.Profiles.Count; i++)
+        @foreach (KeyValuePair<string, Profile>entry in @ViewBag.Profiles)
         {
           <li class="card">
-            <h2>@ViewBag.Profiles[i].Name</h2>
-            <p>@ViewBag.Profiles[i].Age years old</p>
-            <p>About Me:<br>@ViewBag.Profiles[i]Details</p>
-            <p>@Html.ActionLink("See More", "Details", "Profiles", new { id = @ViewBag.Profiles[i].ProfileId })</p>
+            <img src="data:image/jpg;base64,@entry.Key" alt="Profile Image" class="profileImg"/>
+            <div class="profileText">
+              <h2>@entry.Value.Name</h2>
+              <p>@entry.Value.Age years old</p>
+              <p>About Me:<br>@entry.Value.Details</p>
+              <p>@Html.ActionLink("See More", "Details", "Profiles", new { id = @entry.Value.ProfileId })</p>
+            </div>
           </li>
         }
+          
+
       </div>      
     </ul>
     <button class="but-nope">❌</button>
