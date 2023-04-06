@@ -43,7 +43,7 @@ namespace DiLPr.Controllers
 
       Profile thisProfile = await _db.Profiles
             .Include(profile => profile.JoinEntities)
-            .ThenInclude(join => join.Tag)
+            .ThenInclude(join => join.Tag) 
             .FirstAsync(profile => profile.User == user);
 
       List<Image> imgList = _db.Images.Where(entry=> entry.Profile == thisProfile).ToList();
@@ -55,7 +55,6 @@ namespace DiLPr.Controllers
         // string imageDataURL = string.Format("data:image/jpg;base64", imageBase64Data);
         //specific to jpg?? need to figure out how to make applicable to others
         ViewBag.Images.Add(img.ImageId,imageBase64Data);
-        
       }
 
       return View(thisProfile);
@@ -159,12 +158,19 @@ namespace DiLPr.Controllers
       Profile currentProfile = await _db.Profiles.FirstAsync(entry => entry.User == user); 
 
       Image targetImage = _db.Images.First(entry => entry.ImageId == id);
+      int deletedId = targetImage.ImageId;
+      
+
       _db.Images.Remove(targetImage);
       _db.SaveChanges();
 
-      if(currentProfile.ProfilePic == 0)
+      if(currentProfile.ProfilePic == deletedId && _db.Images.First(entry => entry.Profile == currentProfile) != null)
       {
         currentProfile.ProfilePic = _db.Images.First(entry => entry.Profile == currentProfile).ImageId;
+        _db.SaveChanges();
+      } else if (currentProfile.ProfilePic == deletedId && _db.Images.First(entry => entry.Profile == currentProfile) == null)
+      {
+        currentProfile.ProfilePic = 0;
       }
 
       return RedirectToAction("Index");

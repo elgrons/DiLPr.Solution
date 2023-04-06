@@ -19,7 +19,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        Random rand = new Random();  
+        Random rand = new Random();   
         int toSkip = rand.Next(1, _db.Profiles.Count());
         var profiles =  _db.Profiles.OrderBy(x=>Guid.NewGuid()).Skip(toSkip).Take(5).ToList();
       
