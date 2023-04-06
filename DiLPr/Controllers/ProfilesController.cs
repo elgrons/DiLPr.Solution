@@ -48,14 +48,14 @@ namespace DiLPr.Controllers
 
       List<Image> imgList = _db.Images.Where(entry=> entry.Profile == thisProfile).ToList();
       ViewBag.Images = new Dictionary < int, string > ();
-      int i = 0;
+      
       foreach(Image img in imgList)
       {
         string imageBase64Data = Convert.ToBase64String(img.ImageData);
         // string imageDataURL = string.Format("data:image/jpg;base64", imageBase64Data);
         //specific to jpg?? need to figure out how to make applicable to others
-        ViewBag.Images.Add(i,imageBase64Data);
-        i++;
+        ViewBag.Images.Add(img.ImageId,imageBase64Data);
+        
       }
 
       return View(thisProfile);
@@ -89,11 +89,10 @@ namespace DiLPr.Controllers
         _db.Images.Add(img);
         _db.SaveChanges();
 
-        List<Image> imgList = _db.Images.Where(entry=> entry.Profile == currentProfile).ToList();
-          if(imgList.Count == 1)
-          {
-            currentProfile.ProfilePic = img.ImageId;
-          }
+        if(currentProfile.ProfilePic == 0)
+        {
+          currentProfile.ProfilePic = img.ImageId;
+        }
         _db.SaveChanges();
         
       }
@@ -112,7 +111,11 @@ namespace DiLPr.Controllers
     {
       _db.Profiles.Update(profile);
       _db.SaveChanges();
-      return RedirectToAction("UploadImage", "Profiles");
+      if(profile.ProfilePic <=0)
+      {
+        return RedirectToAction("UploadImage","Profiles");
+      }
+      return RedirectToAction("Index");
     }
 
     public ActionResult Details(int id)
@@ -123,19 +126,48 @@ namespace DiLPr.Controllers
             .FirstOrDefault(profile => profile.ProfileId == id);
 
       List<Image> imgList = _db.Images.Where(entry=> entry.Profile == thisProfile).ToList();
-      // List<Image> imgList = _db.Images.ToList();
+      
       ViewBag.Images = new Dictionary < int, string > ();
-      int i = 0;
+      
       foreach(Image img in imgList)
       {
         string fish = Convert.ToBase64String(img.ImageData);
         // string imageDataURL = string.Format("data:image/jpg;base64", imageBase64Data);
         //specific to jpg?? need to figure out how to make applicable to others
-        ViewBag.Images.Add(i,fish);
-        i++;
+        ViewBag.Images.Add(img.ImageId,fish);
+        
       }
       
       return View(thisProfile);
+    }
+
+    public async Task<ActionResult> UpdateProfilePic(int id)
+    {
+      string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      AppUser user = await _userManager.FindByIdAsync(userId);
+      Profile currentProfile = await _db.Profiles.FirstAsync(entry => entry.User == user);      
+      currentProfile.ProfilePic = id;
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> DeletePicture(int id)
+    {
+      string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      AppUser user = await _userManager.FindByIdAsync(userId);
+      Profile currentProfile = await _db.Profiles.FirstAsync(entry => entry.User == user); 
+
+      Image targetImage = _db.Images.First(entry => entry.ImageId == id);
+      _db.Images.Remove(targetImage);
+      _db.SaveChanges();
+
+      if(currentProfile.ProfilePic == 0)
+      {
+        currentProfile.ProfilePic = _db.Images.First(entry => entry.Profile == currentProfile).ImageId;
+      }
+
+      return RedirectToAction("Index");
     }
 
     public ActionResult AddTag(int id)

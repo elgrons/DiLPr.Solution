@@ -6,26 +6,33 @@
 {
   <div class="text-center">
     <h1 class="display-4">Welcome to DiLPr</h1>
+      <h4>Check Out Pups Below</h4>
+        <h6>Swipe Right to Bone</h6>
+        <h6>Swipe Left to Paws on their Attention</h6>
   </div>
 
   <div class="cardcontainer list">
     <ul class="cardlist">
-      <div class="dog-profile">
         @foreach (KeyValuePair<string, Profile>entry in @ViewBag.Profiles)
         {
           <li class="card">
-            <img src="data:image/jpg;base64,@entry.Key" alt="Profile Image" class="profileImg"/>
-            <div class="profileText">
-              <h2>@entry.Value.Name</h2>
-              <p>@entry.Value.Age years old</p>
-              <p>About Me:<br>@entry.Value.Details</p>
-              <p>@Html.ActionLink("See More", "Details", "Profiles", new { id = @entry.Value.ProfileId })</p>
+            <div class="content">
+              <div class="tile">
+                <div class="user">
+                  <img class ="user" src="data:image/jpg;base64,@entry.Key" alt="Profile Image" class="profileImg"/>
+                    <div class="text">
+                      <div class="name">
+                        <strong>@entry.Value.Name</strong><br>
+                        Age: @entry.Value.Age<br>
+                        About Me: @entry.Value.Details <br>
+                        @Html.ActionLink("See More", "Details", "Profiles", new { id = @entry.Value.ProfileId })
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </li>
-        }
-          
-
-      </div>      
+        }         
     </ul>
     <button class="but-nope">❌</button>
     <button class="but-yay">✔️</button>
@@ -33,6 +40,10 @@
 }
 else
 {
-  <h1>Dog-gone it!</h1> //sad dog face goes here//
-  <h5>You must log in or create an account to view pups in your area</h5>
+  <div id="home-alt">
+    <h1 style="font-weight:bold;">Dog-gone it!</h1>
+    <p>You must @Html.ActionLink("log in or create an account", "Index", "Account") to view pups in your area</p>
+    <br>
+    <img src="/img/saddog.jpeg" id="sad-pup">
+  </div>
 }

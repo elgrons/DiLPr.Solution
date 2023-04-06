@@ -13,10 +13,10 @@
 
 @foreach (Tag tag in Model)
 {
-  <li>@Html.ActionLink($"{tag.Name}", "Details", new { id = tag.TagId })</li>
+  <li id="accent">@Html.ActionLink($"{tag.Name}", "Details", new { id = tag.TagId })</li>
 }
 
 <br />
 <a href="/Tags/Create">
-  <button>Add a new interest</button>
+  <button>Add new interest</button>
 </a>

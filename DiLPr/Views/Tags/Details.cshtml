@@ -15,10 +15,10 @@ else
   <ul>
     @foreach(TagProfile join in Model.JoinEntities)
     {
-      <li><a href='@Url.Action("Details", "Profiles", new { id = join.ProfileId })'><h5>@join.Profile.Name</h5></a></li>
+      <li id="accent"><a href='@Url.Action("Details", "Profiles", new { id = join.ProfileId })'><h5>@join.Profile.Name</h5></a></li>
     }
   </ul>
 }
 <br>
-<span id="profile-links">@Html.ActionLink("Add interest to profile", "AddProfile", new { id = @Model.TagId })</span>
+<span id="profile-links">@Html.ActionLink("Add interest to profile |", "AddProfile", new { id = @Model.TagId })</span>
 <span id="profile-links">@Html.ActionLink("Back to browse", "Index")</span>

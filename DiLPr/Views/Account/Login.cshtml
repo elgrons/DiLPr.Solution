@@ -1,3 +1,5 @@
 @await Html.PartialAsync("LoginModal")
+@await Html.PartialAsync("RegisterModal")
+@Html.ValidationSummary()
 <button onclick="showModal('login')">Log in</button>
-  <button onclick="showModal('register')">Register</button>
+<button onclick="showModal('register')">Register</button>

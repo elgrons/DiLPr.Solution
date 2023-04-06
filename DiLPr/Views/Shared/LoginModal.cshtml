@@ -3,7 +3,10 @@
 
 <div id="login-modal" class="modal obscured">
   <div class="modal-message">Log in</div>
-
+  @if(!ViewData.ModelState.IsValid)
+  {
+    @Html.ValidationSummary()
+  }
   @using (Html.BeginForm("Login", "Account"))
   {
     <div class="form-row">
@@ -14,10 +17,11 @@
       @Html.LabelFor(m => m.Password)
       @Html.EditorFor(m => m.Password)
     </div>
-    <button class="green" type="submit">Log in</button>
+    <div class="button-area">
+      <button class="red" type="submit">Log in</button>
+    </div>
   }
-
   <div class="button-area">
-    <button onclick="hideModal('login')">Cancel</button>
+    <button id="cancel-btn" onclick="hideModal('login')">Cancel</button>
   </div>
 </div>

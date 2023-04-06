@@ -4,7 +4,7 @@
 
 @model DiLPr.Models.Profile
 
-<h2>What does @Html.DisplayFor(model => model.Name) like?</h2>
+<h1>What does @Html.DisplayFor(model => model.Name) like to do?</h1>
 <br>
 @* @using (Html.BeginForm())
 {
@@ -15,19 +15,18 @@
   <br><br>
   <input type="submit" value="Add interest" id="green-button"/>
 } *@
-
   <form method="post">
     <table class="table" style="width: 200px;">
       @foreach (Tag tag in ViewBag.Tags)
       {
         <tr>
-          <td>@tag.Name</td>
+          <td id="accent">@tag.Name</td>
           <td><input name="tags" type="checkbox" value="@tag.TagId"></td>
         </tr>
       }
     </table>
     <input type="hidden" value="@Model.ProfileId" name="profileId" id="profileId">
-    <input type="submit" value="Add">
+    <button type="submit">That's what @Html.DisplayFor(model => model.Name) likes to do</button>
     <br><br>
     <h5>@Html.ActionLink("Cancel", "Index")</h5>
   </form>

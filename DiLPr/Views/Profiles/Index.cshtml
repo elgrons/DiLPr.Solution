@@ -13,11 +13,18 @@
     {
         @foreach (KeyValuePair<int, string> entry in ViewBag.Images)
         {
-        <img src="data:image/jpg;base64,@entry.Value" alt="Profile Image" class="profileImg"/>
-        
+            <br>
+            <img src="data:image/jpg;base64,@entry.Value" alt="Profile Image" class="profileImg"/>
+            <br>
+            <button id="profile-btn">@Html.ActionLink("Make Profile Pic", "UpdateProfilePic", new { id = entry.Key })</button>
+            <form method = "post" action="@Url.Action("DeletePicture", "Profiles")">
+                <input type="hidden" value="@entry.Key" name="id">
+                <button id="profile-btn" type="submit">Delete This Picture</button>
+            </form>
+            
         }
     }
-    <br>
+    <br><br><br>
     <h5>About me</h5>
     <p>@Model.Details</p>
     <br><br>
@@ -37,7 +44,7 @@
     </ul>
 </div>
 <br /><br />
-@Html.ActionLink("Add an Interest", "AddTag", new { id = Model.ProfileId })
+@Html.ActionLink("Add Some Interests |", "AddTag", new { id = Model.ProfileId })
 
-<span id="profile-links">@Html.ActionLink("Edit Profile", "Edit", new { id = Model.ProfileId })</span>
-<span id="profile-links">@Html.ActionLink("Add a Profile Picture", "UploadImage", new { id = Model.ProfileId })</span>
+<span id="profile-links">@Html.ActionLink("Edit Profile |", "Edit", new { id = Model.ProfileId })</span>
+<span id="profile-links">@Html.ActionLink("Add a Profile Pic", "UploadImage", new { id = Model.ProfileId })</span>

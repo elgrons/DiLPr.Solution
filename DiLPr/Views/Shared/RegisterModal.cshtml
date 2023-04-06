@@ -22,10 +22,12 @@
       @Html.LabelFor(user=> user.ConfirmPassword)
       @Html.EditorFor(user=> user.ConfirmPassword)
     </div>
-    <button class="yellow" type="submit">Register</button>
+    <div class="button-area">
+      <button class="red" type="submit">Register</button>
+    </div>
   }
   
   <div class="button-area">
-    <button onclick="hideModal('register')">Cancel</button>
+    <button id="cancel-btn" onclick="hideModal('register')">Cancel</button>
   </div>
 </div>

@@ -9,10 +9,11 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-  <h2 style="font-size: 40px;">Hello @User.Identity.Name</h2>
+  <h2 style="font-size: 40px;">Hello @User.Identity.Name!</h2>
 } 
 else
 {
   <button onclick="showModal('login')">Log in</button>
-  <button onclick="showModal('register')">Register</button>
+  <br><br>
+  <button class="red" onclick="showModal('register')">Register</button>
 }

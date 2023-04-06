@@ -54,9 +54,16 @@ namespace DiLPr.Controllers
     }
 
     [HttpPost]
-    public async Task<ActionResult> Login(LoginViewModel model)
+    public async Task<IActionResult> Login(LoginViewModel model)
     {
-      AppUser user = await _userManager.FindByEmailAsync(model.Email);
+      #nullable enable
+      AppUser? user = await _userManager.FindByEmailAsync(model.Email);
+      #nullable disable
+      if(user == null)
+      {
+        ModelState.AddModelError("", "There is something wrong with your email or password. Please try again.");
+        return View(model);
+      }
       if (!ModelState.IsValid)
       {
         return View(model);
