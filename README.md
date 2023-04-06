@@ -16,7 +16,17 @@
 
 ## Description
 
-TBD
+A community based Mvc web app that brings folks (or in this case pupprs) together.
+
+A puppr can:
+
+* Register for an account and login.
+
+* Update their profile picture, update their age and breed, and list interests(for example: cheese, running, peaceful naps).
+
+* View the profiles of other pupprs and swipe "yes" or "no" on them based on their profile information.
+
+* Search for other pupprs by viewing a list of hosted interests.
 
 ## Setup/Installation Requirements
 
@@ -35,7 +45,7 @@ TBD
 ```json
 {
     "ConnectionStrings": {
-        "DefaultConnection": "Server=localhost;Port=3306;database=dilpr_data;uid=[YOUR-USERNAME-HERE];pwd=[YOUR-PASSWORD-HERE];"
+        "DefaultConnection": "Server=localhost;Port=3306;database=dilpr_weds;uid=[YOUR-USERNAME-HERE];pwd=[YOUR-PASSWORD-HERE];"
     }
 }
 ```
@@ -51,9 +61,15 @@ TBD
 * _Click the drop down, select "Tables" drop down._
 * _Verify the tables. There should be: ._
 
+## Stretch Goals
+
+* _Add location services so you can know which puppr is closest to you._
+
+* _Associate "liked" and "disliked" profiles with active user's profile._
+
 ## Known Bugs
 
-* _No known bugs._
+* _Login/Register returns an unhandled error if there are misspellings or input mistakes._
 
 * _Please reach out with any questions or concerns to [eliot.lauren@gmail.com](eliot.lauren@gmail.com), [carl.sustrich@gmail.com](carl.sustrich@gmail.com), [jannon.sielaff@gmail.com](jannon.sielaff@gmail.com), [b.bakshev@gmail.com](b.bakshev@gmail.com), [eluckie.d@gmail.com](eluckie.d@gmail.com)_
 
